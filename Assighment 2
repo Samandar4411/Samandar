@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dungeon Crawl Report by Sodikjonov Samandar</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      padding: 20px;
+    }
+    h1, h2, h3 {
+      color: #00bcd4;
+    }
+    code {
+      background: #1e1e1e;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    pre {
+      background: #1e1e1e;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    section {
+      margin-bottom: 30px;
+    }
+    ul {
+      margin: 10px 0 10px 20px;
+    }
+    a {
+      color: #00bcd4;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dungeon Crawl Report</h1>
+    <p><strong>Sodikjonov Samandar</strong> | Personal Website</p>
+  </header>
+
+  <section id="objective">
+    <h2>Objective</h2>
+    <p>
+      The purpose of this project was to familiarize myself with basic CLI commands and the power of text-based interfaces through an engaging dungeon crawl simulation. The goal was to navigate a computer directory system, overcome obstacles, and ultimately find the hidden reward—the legendary Chalice.
+    </p>
+  </section>
+
+  <section id="key-skills">
+    <h2>Key Skills Developed</h2>
+    <ul>
+      <li>Navigating folder structures using the command line interface (CLI).</li>
+      <li>Identifying common file types by their extensions (<code>.dat</code>, <code>.tome</code>, <code>.info</code>).</li>
+      <li>Using commands such as <code>cd</code>, <code>dir</code>, <code>type</code>, <code>attrib</code>, and <code>findstr</code>.</li>
+      <li>Basic troubleshooting and problem solving—essentially, “becoming a hacker!”</li>
+    </ul>
+  </section>
+
+  <section id="playthrough">
+    <h2>Step-by-Step Playthrough</h2>
+    <h3>1. Starting Out</h3>
+    <p>
+      I began my journey at the root directory, where I discovered files like <code>FortressLore.txt</code> and <code>README.md</code>. Reading these provided hints about the fortress and the ultimate reward.
+    </p>
+    <h3>2. Navigating to the Entrance Grounds</h3>
+    <p>
+      I used the <code>cd</code> command to enter the <strong>EntranceGrounds</strong> directory. There, I encountered the <strong>OuterWalls</strong> folder and the file <strong>Gatehouse.info</strong>.
+    </p>
+    <h3>3. Exploring OuterWalls and InnerKeep</h3>
+    <p>
+      In <code>C:\EntranceGrounds\OuterWalls</code>, I saw the <strong>InnerKeep</strong> directory and the file <strong>CrumblingTower.look</strong>. By reading this file using <code>type CrumblingTower.look</code>, I learned that the InnerKeep lay beyond a locked door.
+    </p>
+    <h3>4. Finding the Key</h3>
+    <p>
+      In the <strong>StorageRoom</strong> directory, I discovered <code>StoneKey.key</code>—an ancient key with mysterious engravings, clearly meant to open the locked door in the InnerKeep.
+    </p>
+    <h3>5. Unlocking the Door</h3>
+    <p>
+      After moving the key from StorageRoom to InnerKeep, I used it to unlock the door. The description read, "The Stone Key glows brightly as you place it in the Inner Keep. The massive locked door slowly swings open!" Although there wasn’t a “Congratulations” message, I knew I had succeeded.
+    </p>
+    <h3>6. Exploring the Forbidden Library</h3>
+    <p>
+      Through the now-open door, I entered a new area: the Forbidden Library. Here, I found the <code>CursedBook.tome</code>, which resisted removal due to dark energy. I removed its read-only attribute using <code>attrib -r CursedBook.tome</code> and then deleted it with <code>del CursedBook.tome</code>. This action caused the cursed book to vanish and revealed a hidden <strong>ReadingChamber</strong> behind the wall.
+    </p>
+    <h3>7. Investigating the Vault</h3>
+    <p>
+      Unable to enter the ReadingChamber due to lingering dark energy, I proceeded to the <strong>Vault</strong> in the Forbidden Library. In the Vault, I discovered the <code>StoneSentinel.dat</code> file, which described a towering sentinel statue that once held the legendary Chalice.
+    </p>
+    <p>
+      Although the Chalice wasn’t found in the Vault, this clue suggested that it was hidden somewhere else in the fortress, leaving me with the next challenge to uncover its location.
+    </p>
+  </section>
+
+  <section id="challenges">
+    <h2>Obstacles Encountered</h2>
+    <ul>
+      <li>
+        <strong>Locked Door:</strong> The door in InnerKeep was locked and required the correct key—<code>StoneKey.key</code>—to be used.
+      </li>
+      <li>
+        <strong>Dark Energy:</strong> The <strong>ReadingChamber</strong> was shrouded in dark energy. I had to remove the cursed file (<code>CursedBook.tome</code>) to try to clear the path.
+      </li>
+      <li>
+        <strong>Missing Chalice:</strong> The vault revealed clues about a Chalice, but it remained elusive, suggesting that further exploration was necessary.
+      </li>
+    </ul>
+  </section>
+
+  <section id="resources">
+    <h2>Further Research & Help</h2>
+    <p>
+      During this dungeon crawl, I encountered challenges that required me to review CLI command syntax and file management techniques. Some helpful resources included:
+    </p>
+    <ul>
+      <li><a href="https://josuedean.github.io/ibm/CLI_dungeon_crawl.html" target="_blank">CLI Dungeon Crawl Tutorial</a></li>
+      <li><a href="https://ss64.com/nt/" target="_blank">CLI Command Reference</a></li>
+    </ul>
+    <p>
+      I also received guidance from peers and AI assistants to troubleshoot issues like directory navigation and file attribute manipulation.
+    </p>
+  </section>
+
+  <section id="conclusion">
+    <h2>Overall Experience</h2>
+    <p>
+      This CLI dungeon crawl was both challenging and educational. I learned valuable skills in navigating a computer directory system and gained insights into command-line operations. The obstacles—locked doors, cursed files, and dark energy—made the experience engaging and fun.
+    </p>
+    <p>
+      I look forward to applying these skills in future projects, and I hope my dungeon crawl report inspires others to explore the world of CLI and problem-solving!
+    </p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Sodikjonov Samandar | All Rights Reserved</p>
+  </footer>
+</body>
+</html>
