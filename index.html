@@ -41,38 +41,57 @@
     }
   </style>
 </head>
+
 <body>
+
+  <!-- Grade Box at the Top -->
+  <div class="assignment">
+    <h2>Your Current Grade: <span id="grade">Loading...</span></h2>
+  </div>
+
+  <!-- Assignments Section -->
   <div class="container">
     <h1>Weekl</h1>
 
-    <!-- Week 1 -->
     <div class="week">
       <h2>Week 1</h2>
-      <a href="https://samandar4411.github.io/Samandar/assignment1.html"target="_blank">Go to website</a>
+      <a href="https://samandar4411.github.io/Samandar/assignment1.html" target="_blank">Go to website</a>
     </div>
 
-    <!-- Week 2 -->
     <div class="week">
-      <h2>Week 2(Dungeon crawl)</h>
+      <h2>Week 2 (Dungeon crawl)</h2>
       <a href="https://docs.google.com/document/d/1TzNpxQp3Hemf24OyqhJfxHvGr_7pIgAbHqGxopqbMcY/edit?usp=drivesdk" target="_blank">Go to website</a>
     </div>
 
-    <!-- Repeat for all other assignments -->
-
-    <!-- Week 15 -->
     <div class="week">
       <h2>Week 3</h2>
-     <a href="https://drive.google.com/drive/folders/1sbKEjgAW_eKwSv0mg72KH2lr4PC2fz3s" target="_blank">Go to website</a>
+      <a href="https://drive.google.com/drive/folders/1sbKEjgAW_eKwSv0mg72KH2lr4PC2fz3s" target="_blank">Go to website</a>
     </div>
-    
-  <!-- Week 6 -->
+
     <div class="week">
       <h2>Week 6</h2>
-      <a href="https://abu-assignments.netlify.app/encryption_playground.html"target="_blank">Go to website</a>
-      </div>
+      <a href="https://abu-assignments.netlify.app/encryption_playground.html" target="_blank">Go to website</a>
+    </div>
 
-<!-- Week 7 -->
     <div class="week">
       <h2>Week 7</h2>
-      <a href="https://docs.google.com/document/d/1VSeIZcXTnhK688wjcoC1dJOZbhTmzPl8HsC58pdLlHE/edit?usp=sharing"target="_blank">Go to website</a>
+      <a href="https://docs.google.com/document/d/1VSeIZcXTnhK688wjcoC1dJOZbhTmzPl8HsC58pdLlHE/edit?usp=sharing" target="_blank">Go to website</a>
+    </div>
+  </div>
 
+  <!-- JavaScript to Load Grade from Google Apps Script -->
+  <script>
+    fetch("https://script.google.com/macros/s/AKfycbx-J66C_whvSsfBUSFqtzaNGPXN_8yRAie2hPbvn3UxrJZ10sVwcvJeIcOTFoGruCyx/exec")
+      .then(response => response.json())
+      .then(data => {
+        const grade = data.grade; // Assuming "grade" is the key in the JSON response
+        document.getElementById("grade").textContent = grade;
+      })
+      .catch(error => {
+        console.error("Error loading grade:", error);
+        document.getElementById("grade").textContent = "Not available";
+      });
+  </script>
+
+</body>
+</html>
