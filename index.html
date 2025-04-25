@@ -11,10 +11,20 @@
       margin: 0;
       padding: 0;
     }
+    .grade-banner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fce4ec;
+      padding: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      border-bottom: 2px solid #f06292;
+    }
     .container {
       width: 80%;
       margin: auto;
-      padding-top: 50px;
+      padding-top: 30px;
     }
     h1 {
       text-align: center;
@@ -44,9 +54,9 @@
 
 <body>
 
-  <!-- Grade Box at the Top -->
-  <div class="assignment">
-    <h2>Your Current Grade: <span id="grade">Loading...</span></h2>
+  <!-- ✅ Grade Banner at the Top -->
+  <div class="grade-banner" id="gradeDisplay">
+    My current grade: Loading...
   </div>
 
   <!-- Assignments Section -->
@@ -79,18 +89,14 @@
     </div>
   </div>
 
-  <!-- JavaScript to Load Grade from Google Apps Script -->
+  <!-- ✅ Hardcoded Grade Script -->
   <script>
-    fetch("https://script.google.com/macros/s/AKfycbx-J66C_whvSsfBUSFqtzaNGPXN_8yRAie2hPbvn3UxrJZ10sVwcvJeIcOTFoGruCyx/exec")
-      .then(response => response.json())
-      .then(data => {
-        const grade = data.grade; // Assuming "grade" is the key in the JSON response
-        document.getElementById("grade").textContent = grade;
-      })
-      .catch(error => {
-        console.error("Error loading grade:", error);
-        document.getElementById("grade").textContent = "Not available";
-      });
+    const score = 2;
+    const total = 25;
+    const percent = ((score / total) * 100).toFixed(0);
+
+    document.getElementById("gradeDisplay").textContent =
+      `My current grade: ${score} / ${total} (${percent}%)`;
   </script>
 
 </body>
