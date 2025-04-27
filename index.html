@@ -16,6 +16,8 @@
       top: 10px;
       right: 10px;
       display: flex;
+      flex-direction: column;
+      align-items: flex-end;
       gap: 10px;
     }
     .grade-box {
@@ -26,11 +28,26 @@
       font-weight: bold;
       font-size: 16px;
       text-align: center;
+      min-width: 200px;
+    }
+    .progress-bar {
+      width: 100%;
+      background-color: #ccc;
+      border-radius: 10px;
+      margin-top: 5px;
+      height: 10px;
+      overflow: hidden;
+    }
+    .progress {
+      height: 10px;
+      background-color: #4caf50;
+      width: 0%;
+      transition: width 0.8s ease;
     }
     .container {
       width: 80%;
       margin: auto;
-      padding-top: 80px;
+      padding-top: 150px;
     }
     h1 {
       text-align: center;
@@ -55,6 +72,12 @@
     .week a:hover {
       text-decoration: underline;
     }
+    .timestamp {
+      font-size: 12px;
+      color: #555;
+      margin-top: 5px;
+      text-align: right;
+    }
   </style>
 </head>
 
@@ -67,6 +90,12 @@
     </div>
     <div class="grade-box" id="gradeBox">
       Grade: Loading...
+      <div class="progress-bar">
+        <div class="progress" id="gradeProgress"></div>
+      </div>
+    </div>
+    <div class="timestamp" id="updateTime">
+      Last updated: Loading...
     </div>
   </div>
 
@@ -112,24 +141,36 @@
 
         if (!isNaN(attendanceScore) && !isNaN(attendanceTotal) && attendanceTotal !== 0) {
           const attendancePercent = ((attendanceScore / attendanceTotal) * 100).toFixed(0);
-          document.getElementById("attendanceBox").textContent =
-            `Attendance: ${attendanceScore} / ${attendanceTotal} (${attendancePercent}%)`;
+          const attendanceBox = document.getElementById("attendanceBox");
+          attendanceBox.textContent = `Attendance: ${attendanceScore} / ${attendanceTotal} (${attendancePercent}%)`;
+
+          if (attendancePercent == 100) {
+            attendanceBox.style.backgroundColor = "#c8e6c9"; // light green
+            attendanceBox.style.borderColor = "#2e7d32"; // darker green
+          }
         } else {
           document.getElementById("attendanceBox").textContent = "Attendance: Not available";
         }
 
         if (!isNaN(gradeScore) && !isNaN(gradeTotal) && gradeTotal !== 0) {
           const gradePercent = ((gradeScore / gradeTotal) * 100).toFixed(0);
-          document.getElementById("gradeBox").textContent =
-            `Grade: ${gradeScore} / ${gradeTotal} (${gradePercent}%)`;
+          document.getElementById("gradeBox").childNodes[0].textContent = `Grade: ${gradeScore} / ${gradeTotal} (${gradePercent}%)`;
+
+          // Progress bar
+          document.getElementById("gradeProgress").style.width = `${gradePercent}%`;
         } else {
-          document.getElementById("gradeBox").textContent = "Grade: Not available";
+          document.getElementById("gradeBox").childNodes[0].textContent = "Grade: Not available";
         }
+
+        // Update timestamp
+        const now = new Date();
+        document.getElementById("updateTime").textContent =
+          `Last updated: ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
       })
       .catch(error => {
         console.error("Error loading grade:", error);
         document.getElementById("attendanceBox").textContent = "Attendance: Not available";
-        document.getElementById("gradeBox").textContent = "Grade: Not available";
+        document.getElementById("gradeBox").childNodes[0].textContent = "Grade: Not available";
       });
   </script>
 
