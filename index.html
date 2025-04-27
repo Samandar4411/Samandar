@@ -28,21 +28,7 @@
       font-weight: bold;
       font-size: 16px;
       text-align: center;
-      min-width: 200px;
-    }
-    .progress-bar {
-      width: 100%;
-      background-color: #ccc;
-      border-radius: 10px;
-      margin-top: 5px;
-      height: 10px;
-      overflow: hidden;
-    }
-    .progress {
-      height: 10px;
-      background-color: #4caf50;
-      width: 0%;
-      transition: width 0.8s ease;
+      min-width: 220px;
     }
     .container {
       width: 80%;
@@ -74,25 +60,21 @@
     }
     .timestamp {
       font-size: 12px;
-      color: #555;
+      color: #777;
       margin-top: 5px;
-      text-align: right;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ✅ Grade Boxes at Top Right -->
+  <!-- ✅ Top Right Grade Boxes -->
   <div class="grade-area">
     <div class="grade-box" id="attendanceBox">
       Attendance: Loading...
     </div>
     <div class="grade-box" id="gradeBox">
       Grade: Loading...
-      <div class="progress-bar">
-        <div class="progress" id="gradeProgress"></div>
-      </div>
     </div>
     <div class="timestamp" id="updateTime">
       Last updated: Loading...
@@ -129,7 +111,7 @@
     </div>
   </div>
 
-  <!-- ✅ JavaScript to Fetch from Apps Script -->
+  <!-- ✅ JavaScript to Fetch Data -->
   <script>
     fetch("https://script.google.com/macros/s/AKfycbyC_XTsH7Yw_Yi_XGYbh1y1CeVxRIkYVJdLpsgsmAlI6N45YGsbPxbTFOwp8P_79OF-/exec")
       .then(response => response.json())
@@ -146,7 +128,7 @@
 
           if (attendancePercent == 100) {
             attendanceBox.style.backgroundColor = "#c8e6c9"; // light green
-            attendanceBox.style.borderColor = "#2e7d32"; // darker green
+            attendanceBox.style.borderColor = "#2e7d32"; // dark green
           }
         } else {
           document.getElementById("attendanceBox").textContent = "Attendance: Not available";
@@ -154,15 +136,13 @@
 
         if (!isNaN(gradeScore) && !isNaN(gradeTotal) && gradeTotal !== 0) {
           const gradePercent = ((gradeScore / gradeTotal) * 100).toFixed(0);
-          document.getElementById("gradeBox").childNodes[0].textContent = `Grade: ${gradeScore} / ${gradeTotal} (${gradePercent}%)`;
-
-          // Progress bar
-          document.getElementById("gradeProgress").style.width = `${gradePercent}%`;
+          const gradeBox = document.getElementById("gradeBox");
+          gradeBox.textContent = `Grade: ${gradeScore} / ${gradeTotal} (${gradePercent}%)`;
         } else {
-          document.getElementById("gradeBox").childNodes[0].textContent = "Grade: Not available";
+          document.getElementById("gradeBox").textContent = "Grade: Not available";
         }
 
-        // Update timestamp
+        // Timestamp update
         const now = new Date();
         document.getElementById("updateTime").textContent =
           `Last updated: ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
@@ -170,7 +150,7 @@
       .catch(error => {
         console.error("Error loading grade:", error);
         document.getElementById("attendanceBox").textContent = "Attendance: Not available";
-        document.getElementById("gradeBox").childNodes[0].textContent = "Grade: Not available";
+        document.getElementById("gradeBox").textContent = "Grade: Not available";
       });
   </script>
 
