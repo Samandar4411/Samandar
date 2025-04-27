@@ -30,23 +30,23 @@
       text-align: center;
       color: #333;
     }
-    .assignment {
+    .week {
       background-color: #fff;
       padding: 20px;
       margin: 10px 0;
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
-    .assignment h2 {
+    .week h2 {
       color: #444;
     }
-    .assignment a {
+    .week a {
       display: inline-block;
       margin-top: 10px;
       color: #007bff;
       text-decoration: none;
     }
-    .assignment a:hover {
+    .week a:hover {
       text-decoration: underline;
     }
   </style>
@@ -54,20 +54,43 @@
 
 <body>
 
-  <!-- ✅ Grade Banner -->
+  <!-- ✅ Grade Banner at the Top -->
   <div class="grade-banner" id="gradeDisplay">
     My current grade: Loading...
   </div>
 
-  <!-- Assignments Section -->
+  <!-- ✅ Assignments Section -->
   <div class="container">
-    <h1>Weekl</h1>
+    <h1>Weekly Assignments</h1>
 
-    <!-- Your weeks here -->
+    <div class="week">
+      <h2>Week 1</h2>
+      <a href="https://samandar4411.github.io/Samandar/assignment1.html" target="_blank">Go to website</a>
+    </div>
+
+    <div class="week">
+      <h2>Week 2 (Dungeon Crawl)</h2>
+      <a href="https://docs.google.com/document/d/1TzNpxQp3Hemf24OyqhJfxHvGr_7pIgAbHqGxopqbMcY/edit?usp=drivesdk" target="_blank">Go to website</a>
+    </div>
+
+    <div class="week">
+      <h2>Week 3</h2>
+      <a href="https://drive.google.com/drive/folders/1sbKEjgAW_eKwSv0mg72KH2lr4PC2fz3s" target="_blank">Go to website</a>
+    </div>
+
+    <div class="week">
+      <h2>Week 6</h2>
+      <a href="https://abu-assignments.netlify.app/encryption_playground.html" target="_blank">Go to website</a>
+    </div>
+
+    <div class="week">
+      <h2>Week 7</h2>
+      <a href="https://docs.google.com/document/d/1VSeIZcXTnhK688wjcoC1dJOZbhTmzPl8HsC58pdLlHE/edit?usp=sharing" target="_blank">Go to website</a>
+    </div>
 
   </div>
 
-  <!-- ✅ JavaScript to fetch grade from Apps Script -->
+  <!-- ✅ JavaScript to Fetch Grade from App Script -->
   <script>
     fetch("https://script.google.com/macros/s/AKfycbwRhj-TTIAVwhmWu3S4dslaRQSy1VhmKKlYMwR9NxrwyHgTSBM5iAZ8e6psZzcUAQRa/exec")
       .then(response => response.json())
