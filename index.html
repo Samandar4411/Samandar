@@ -15,11 +15,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #fce4ec;
+      background-color: #dff0d8;
       padding: 12px;
       font-size: 18px;
       font-weight: bold;
-      border-bottom: 2px solid #f06292;
+      border-bottom: 2px solid #4CAF50;
     }
     .container {
       width: 80%;
@@ -54,7 +54,7 @@
 
 <body>
 
-  <!-- ✅ Grade Banner at the Top -->
+  <!-- ✅ Grade Banner -->
   <div class="grade-banner" id="gradeDisplay">
     My current grade: Loading...
   </div>
@@ -63,40 +63,30 @@
   <div class="container">
     <h1>Weekl</h1>
 
-    <div class="week">
-      <h2>Week 1</h2>
-      <a href="https://samandar4411.github.io/Samandar/assignment1.html" target="_blank">Go to website</a>
-    </div>
+    <!-- Your weeks here -->
 
-    <div class="week">
-      <h2>Week 2 (Dungeon crawl)</h2>
-      <a href="https://docs.google.com/document/d/1TzNpxQp3Hemf24OyqhJfxHvGr_7pIgAbHqGxopqbMcY/edit?usp=drivesdk" target="_blank">Go to website</a>
-    </div>
-
-    <div class="week">
-      <h2>Week 3</h2>
-      <a href="https://drive.google.com/drive/folders/1sbKEjgAW_eKwSv0mg72KH2lr4PC2fz3s" target="_blank">Go to website</a>
-    </div>
-
-    <div class="week">
-      <h2>Week 6</h2>
-      <a href="https://abu-assignments.netlify.app/encryption_playground.html" target="_blank">Go to website</a>
-    </div>
-
-    <div class="week">
-      <h2>Week 7</h2>
-      <a href="https://docs.google.com/document/d/1VSeIZcXTnhK688wjcoC1dJOZbhTmzPl8HsC58pdLlHE/edit?usp=sharing" target="_blank">Go to website</a>
-    </div>
   </div>
 
-  <!-- ✅ Hardcoded Grade Script -->
+  <!-- ✅ JavaScript to fetch grade from Apps Script -->
   <script>
-    const score = 2;
-    const total = 25;
-    const percent = ((score / total) * 100).toFixed(0);
-
-    document.getElementById("gradeDisplay").textContent =
-      `My current grade: ${score} / ${total} (${percent}%)`;
+    fetch("https://script.google.com/macros/s/AKfycbwRhj-TTIAVwhmWu3S4dslaRQSy1VhmKKlYMwR9NxrwyHgTSBM5iAZ8e6psZzcUAQRa/exec")
+      .then(response => response.json())
+      .then(data => {
+        const score = parseFloat(data.score);
+        const total = parseFloat(data.total);
+        
+        if (!isNaN(score) && !isNaN(total) && total !== 0) {
+          const percent = ((score / total) * 100).toFixed(0);
+          document.getElementById("gradeDisplay").textContent =
+            `My current grade: ${score} / ${total} (${percent}%)`;
+        } else {
+          document.getElementById("gradeDisplay").textContent = "My current grade: Not available";
+        }
+      })
+      .catch(error => {
+        console.error("Error loading grade:", error);
+        document.getElementById("gradeDisplay").textContent = "My current grade: Not available";
+      });
   </script>
 
 </body>
