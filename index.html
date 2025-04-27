@@ -111,9 +111,9 @@
     </div>
   </div>
 
-  <!-- ✅ JavaScript to Fetch Data -->
+  <!-- ✅ JavaScript to Fetch Grade and Attendance -->
   <script>
-    fetch("https://script.google.com/macros/s/AKfycbyC_XTsH7Yw_Yi_XGYbh1y1CeVxRIkYVJdLpsgsmAlI6N45YGsbPxbTFOwp8P_79OF-/exec")
+    fetch("https://script.google.com/macros/s/AKfycby8siKo1Q-hpFoWnu05C_xuY-q-4OoBGFy3KU9g4XjARs58fSV6sFbzrV3jomgFNODO/exec")
       .then(response => response.json())
       .then(data => {
         const attendanceScore = parseFloat(data.attendance);
@@ -142,7 +142,7 @@
           document.getElementById("gradeBox").textContent = "Grade: Not available";
         }
 
-        // Timestamp update
+        // Update Last Updated Time
         const now = new Date();
         document.getElementById("updateTime").textContent =
           `Last updated: ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
