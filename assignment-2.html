@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fortress Directory Map</title>
+    <title>Fortress Directory Structure</title>
     <style>
         body {
             background-color: #000;
@@ -11,225 +11,38 @@
             font-family: 'Courier New', monospace;
             padding: 20px;
             margin: 0;
+            line-height: 1.5;
         }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .directory-map {
-            display: flex;
-            margin-bottom: 20px;
-        }
-        .node {
-            display: flex;
-            flex-direction: column;
-            margin: 5px;
-        }
-        .node-content {
-            display: flex;
-            align-items: center;
-        }
-        .node-children {
-            display: flex;
-            flex-direction: column;
-            margin-left: 30px;
-            position: relative;
-        }
-        .branch-line {
-            position: absolute;
-            left: -20px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background-color: #33ff33;
-        }
-        .node-line {
-            width: 20px;
-            height: 2px;
-            background-color: #33ff33;
-            margin-right: 10px;
-        }
-        .node-name {
-            padding: 5px;
-            cursor: pointer;
-        }
-        .node-name:hover {
-            text-decoration: underline;
+        pre {
+            margin: 0;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>C:\</h1>
-        
-        <div class="directory-map" id="directory-map">
-            <!-- Map will be generated here -->
-        </div>
-    </div>
-
-    <script>
-        const directoryStructure = {
-            name: "C:\\",
-            children: [
-                {
-                    name: "FortressLore.txt",
-                    type: "file"
-                },
-                {
-                    name: "README.md",
-                    type: "file"
-                },
-                {
-                    name: "EntranceGrounds",
-                    type: "directory",
-                    children: [
-                        {
-                            name: "Gatehouse.info",
-                            type: "file"
-                        },
-                        {
-                            name: "SidePath",
-                            type: "directory",
-                            children: [
-                                {
-                                    name: "DiscardedNote.txt",
-                                    type: "file"
-                                }
-                            ]
-                        },
-                        {
-                            name: "OuterWalls",
-                            type: "directory",
-                            children: [
-                                {
-                                    name: "CrumblingTower.look",
-                                    type: "file"
-                                },
-                                {
-                                    name: "StorageRoom",
-                                    type: "directory"
-                                },
-                                {
-                                    name: "InnerKeep",
-                                    type: "directory",
-                                    children: [
-                                        {
-                                            name: "GreatHall.info",
-                                            type: "file"
-                                        },
-                                        {
-                                            name: "OldRecords.tome",
-                                            type: "file"
-                                        },
-                                        {
-                                            name: "OpenedDoor",
-                                            type: "directory",
-                                            children: [
-                                                {
-                                                    name: "ForbiddenLibrary",
-                                                    type: "directory",
-                                                    children: [
-                                                        {
-                                                            name: "Vault",
-                                                            type: "directory",
-                                                            children: [
-                                                                {
-                                                                    name: "StoneSentinel.dat",
-                                                                    type: "file"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            name: "ReadingChamber",
-                                                            type: "directory",
-                                                            children: [
-                                                                {
-                                                                    name: "Treasure.txt",
-                                                                    type: "file"
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            name: "Armory",
-                                            type: "directory",
-                                            children: [
-                                                {
-                                                    name: "Weapon.box",
-                                                    type: "file"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            name: "StoneKey.key",
-                                            type: "file"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        };
-
-        function createDirectoryMap(structure, container) {
-            // Create the node
-            const nodeElement = document.createElement('div');
-            nodeElement.className = 'node';
-            
-            // Create node content (line + name)
-            const nodeContentElement = document.createElement('div');
-            nodeContentElement.className = 'node-content';
-            
-            // Add connecting line
-            if (structure.name !== "C:\\") {
-                const lineElement = document.createElement('div');
-                lineElement.className = 'node-line';
-                nodeContentElement.appendChild(lineElement);
-            }
-            
-            // Add node name
-            const nameElement = document.createElement('div');
-            nameElement.className = 'node-name';
-            nameElement.textContent = structure.name;
-            nameElement.style.color = structure.type === 'file' ? '#33ff33' : '#33ff33';
-            nameElement.style.fontWeight = structure.type === 'directory' ? 'bold' : 'normal';
-            nodeContentElement.appendChild(nameElement);
-            
-            nodeElement.appendChild(nodeContentElement);
-            
-            // If it has children, create a container for them
-            if (structure.children && structure.children.length > 0) {
-                const childrenContainer = document.createElement('div');
-                childrenContainer.className = 'node-children';
-                
-                // Add vertical branch line
-                const branchLine = document.createElement('div');
-                branchLine.className = 'branch-line';
-                childrenContainer.appendChild(branchLine);
-                
-                // Create child nodes
-                structure.children.forEach(child => {
-                    createDirectoryMap(child, childrenContainer);
-                });
-                
-                nodeElement.appendChild(childrenContainer);
-            }
-            
-            container.appendChild(nodeElement);
-        }
-
-        // Generate the directory map
-        const mapContainer = document.getElementById('directory-map');
-        createDirectoryMap(directoryStructure, mapContainer);
-    </script>
+    <pre>
+C:\
+├── FortressLore.txt
+├── README.md
+└── EntranceGrounds
+    ├── Gatehouse.info
+    ├── SidePath
+    │   └── DiscardedNote.txt
+    └── OuterWalls
+        ├── CrumblingTower.look
+        ├── StorageRoom
+        └── InnerKeep
+            ├── GreatHall.info
+            ├── OldRecords.tome
+            ├── OpenedDoor
+            │   └── ForbiddenLibrary
+            │       ├── Vault
+            │       │   └── StoneSentinel.dat
+            │       └── ReadingChamber
+            │           └── Treasure.txt
+            ├── Armory
+            │   └── Weapon.box
+            └── StoneKey.key
+    </pre>
 </body>
 </html>
