@@ -11,20 +11,26 @@
       margin: 0;
       padding: 0;
     }
-    .grade-banner {
+    .grade-area {
+      position: absolute;
+      top: 10px;
+      right: 10px;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #dff0d8;
-      padding: 12px;
-      font-size: 18px;
+      gap: 10px;
+    }
+    .grade-box {
+      background-color: #e0f7fa;
+      padding: 10px 15px;
+      border: 2px solid #00acc1;
+      border-radius: 10px;
       font-weight: bold;
-      border-bottom: 2px solid #4CAF50;
+      font-size: 16px;
+      text-align: center;
     }
     .container {
       width: 80%;
       margin: auto;
-      padding-top: 30px;
+      padding-top: 80px;
     }
     h1 {
       text-align: center;
@@ -54,9 +60,14 @@
 
 <body>
 
-  <!-- ✅ Grade Banner at the Top -->
-  <div class="grade-banner" id="gradeDisplay">
-    My current grade: Loading...
+  <!-- ✅ Grade Boxes at Top Right -->
+  <div class="grade-area">
+    <div class="grade-box" id="attendanceBox">
+      Attendance: Loading...
+    </div>
+    <div class="grade-box" id="gradeBox">
+      Grade: Loading...
+    </div>
   </div>
 
   <!-- ✅ Assignments Section -->
@@ -70,7 +81,7 @@
 
     <div class="week">
       <h2>Week 2 (Dungeon Crawl)</h2>
-      <a href="https://github.com/Samandar4411/Samandar/blob/main/assignment-2.html" target="_blank">Go to website</a>
+      <a href="https://docs.google.com/document/d/1TzNpxQp3Hemf24OyqhJfxHvGr_7pIgAbHqGxopqbMcY/edit?usp=drivesdk" target="_blank">Go to website</a>
     </div>
 
     <div class="week">
@@ -79,36 +90,46 @@
     </div>
 
     <div class="week">
-      <h2>Week 6 Crypography tool</h2>
-      <a href="https://docs.google.com/document/d/1sD1B-1KIX2GqvDEltTnetmdmrswmLBYRpl5QXd09zOY/edit?usp=sharing" target="_blank">Go to website</a>
+      <h2>Week 6</h2>
+      <a href="https://abu-assignments.netlify.app/encryption_playground.html" target="_blank">Go to website</a>
     </div>
 
     <div class="week">
       <h2>Week 7</h2>
       <a href="https://docs.google.com/document/d/1VSeIZcXTnhK688wjcoC1dJOZbhTmzPl8HsC58pdLlHE/edit?usp=sharing" target="_blank">Go to website</a>
     </div>
-
   </div>
 
-  <!-- ✅ JavaScript to Fetch Grade from App Script -->
+  <!-- ✅ JavaScript to Fetch from Your Apps Script -->
   <script>
-    fetch("https://script.google.com/macros/s/AKfycbwRhj-TTIAVwhmWu3S4dslaRQSy1VhmKKlYMwR9NxrwyHgTSBM5iAZ8e6psZzcUAQRa/exec")
+    fetch("https://script.google.com/macros/s/AKfycbw-7tsbvAWza_ygDKcoUTQ6VRABFGkkR--z9sqCR0Z9jk-dR0Uk82-T6D4EB95CJUfu/exec")
       .then(response => response.json())
       .then(data => {
-        const score = parseFloat(data.score);
-        const total = parseFloat(data.total);
-        
-        if (!isNaN(score) && !isNaN(total) && total !== 0) {
-          const percent = ((score / total) * 100).toFixed(0);
-          document.getElementById("gradeDisplay").textContent =
-            `My current grade: ${score} / ${total} (${percent}%)`;
+        const attendanceScore = parseFloat(data.attendance);
+        const attendanceTotal = parseFloat(data.attendanceTotal);
+        const gradeScore = parseFloat(data.grade);
+        const gradeTotal = parseFloat(data.gradeTotal);
+
+        if (!isNaN(attendanceScore) && !isNaN(attendanceTotal) && attendanceTotal !== 0) {
+          const attendancePercent = ((attendanceScore / attendanceTotal) * 100).toFixed(0);
+          document.getElementById("attendanceBox").textContent =
+            `Attendance: ${attendanceScore} / ${attendanceTotal} (${attendancePercent}%)`;
         } else {
-          document.getElementById("gradeDisplay").textContent = "My current grade: Not available";
+          document.getElementById("attendanceBox").textContent = "Attendance: Not available";
+        }
+
+        if (!isNaN(gradeScore) && !isNaN(gradeTotal) && gradeTotal !== 0) {
+          const gradePercent = ((gradeScore / gradeTotal) * 100).toFixed(0);
+          document.getElementById("gradeBox").textContent =
+            `Grade: ${gradeScore} / ${gradeTotal} (${gradePercent}%)`;
+        } else {
+          document.getElementById("gradeBox").textContent = "Grade: Not available";
         }
       })
       .catch(error => {
         console.error("Error loading grade:", error);
-        document.getElementById("gradeDisplay").textContent = "My current grade: Not available";
+        document.getElementById("attendanceBox").textContent = "Attendance: Not available";
+        document.getElementById("gradeBox").textContent = "Grade: Not available";
       });
   </script>
 
