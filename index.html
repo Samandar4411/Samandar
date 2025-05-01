@@ -69,34 +69,37 @@
   top: 20px;
   right: 20px;
   padding: 12px 15px;
-  border-radius: 8px;
-  border: 2px solid var(--card-border, #00ffff);
-  box-shadow: 0 0 8px var(--card-border, #00ffff);
-  background-color: var(--card-bg, #1a1a1a);
-  color: var(--card-text, #ffffff);
-  width: 170px;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  background-color: #ffffff;
+  color: #333;
+  width: 190px;
   text-align: center;
   z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s, color 0.3s;
 }
 
 #gradeCard h3 {
   font-size: 14px;
-  margin-bottom: 8px;
-  color: #ffffff;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #555;
 }
 
 #gradeCard h1 {
-  font-size: 28px;
+  font-size: 24px;
   margin: 0;
-  color: #4285f4;
+  color: #1a73e8; /* Google Blue */
+  font-weight: bold;
 }
 
 #gradeCard p {
-  font-size: 12px;
+  font-size: 11px;
   margin-top: 6px;
-  color: #cccccc;
+  color: #888;
 }
+
 
     
   </style>
@@ -142,16 +145,17 @@
 
   <!-- ✅ JavaScript to Fetch Grade and Attendance -->
   <script>
+
     fetch("https://script.google.com/macros/s/AKfycbyTE1JCrup-cX-sJi3jLVzqG0UrW9M76eOtPZMIid2YusMyqoHfk8BZtMkXq2yury_G/exec")
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById('finalGrade').textContent = data.finalGrade + "%";
-      document.getElementById('pointsEarned').textContent = (${data.earnedPoints} / ${data.totalPoints});
-    })
-    .catch(error => {
-      document.getElementById('finalGrade').textContent = "Error!";
-      console.error(error);
-    });
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('finalGrade').textContent = data.finalGrade + "%";
+    document.getElementById('pointsEarned').textContent = ${data.earnedPoints} / ${data.totalPoints};
+  })
+  .catch(error => {
+    document.getElementById('finalGrade').textContent = "Error!";
+    console.error(error);
+  });
 
   </script>
 
