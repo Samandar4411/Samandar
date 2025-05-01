@@ -63,23 +63,52 @@
       color: #777;
       margin-top: 5px;
     }
+
+    #gradeCard {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 2px solid var(--card-border, #00ffff);
+  box-shadow: 0 0 8px var(--card-border, #00ffff);
+  background-color: var(--card-bg, #1a1a1a);
+  color: var(--card-text, #ffffff);
+  width: 170px;
+  text-align: center;
+  z-index: 1000;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#gradeCard h3 {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+#gradeCard h1 {
+  font-size: 28px;
+  margin: 0;
+  color: #4285f4;
+}
+
+#gradeCard p {
+  font-size: 12px;
+  margin-top: 6px;
+  color: #cccccc;
+}
+
+    
   </style>
 </head>
 
 <body>
 
-  <!-- ✅ Top Right Grade Boxes -->
-  <div class="grade-area">
-    <div class="grade-box" id="attendanceBox">
-      Attendance: Loading...
-    </div>
-    <div class="grade-box" id="gradeBox">
-      Grade: Loading...
-    </div>
-    <div class="timestamp" id="updateTime">
-      Last updated: Loading...
-    </div>
-  </div>
+  <div id="gradeCard">
+  <h3>Calculated Grade</h3>
+  <h1 id="finalGrade">Loading...</h1>
+  <p id="pointsEarned">( ... / ... )</p>
+</div>
 
   <!-- ✅ Assignments Section -->
   <div class="container">
@@ -113,45 +142,17 @@
 
   <!-- ✅ JavaScript to Fetch Grade and Attendance -->
   <script>
-    fetch("https://script.google.com/macros/s/AKfycby8siKo1Q-hpFoWnu05C_xuY-q-4OoBGFy3KU9g4XjARs58fSV6sFbzrV3jomgFNODO/exec")
-      .then(response => response.json())
-      .then(data => {
-        const attendanceScore = parseFloat(data.attendance);
-        const attendanceTotal = parseFloat(data.attendanceTotal);
-        const gradeScore = parseFloat(data.grade);
-        const gradeTotal = parseFloat(data.gradeTotal);
+    fetch("https://script.google.com/macros/s/AKfycbyTE1JCrup-cX-sJi3jLVzqG0UrW9M76eOtPZMIid2YusMyqoHfk8BZtMkXq2yury_G/exec")
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('finalGrade').textContent = data.finalGrade + "%";
+      document.getElementById('pointsEarned').textContent = (${data.earnedPoints} / ${data.totalPoints});
+    })
+    .catch(error => {
+      document.getElementById('finalGrade').textContent = "Error!";
+      console.error(error);
+    });
 
-        if (!isNaN(attendanceScore) && !isNaN(attendanceTotal) && attendanceTotal !== 0) {
-          const attendancePercent = ((attendanceScore / attendanceTotal) * 100).toFixed(0);
-          const attendanceBox = document.getElementById("attendanceBox");
-          attendanceBox.textContent = `Attendance: ${attendanceScore} / ${attendanceTotal} (${attendancePercent}%)`;
-
-          if (attendancePercent == 100) {
-            attendanceBox.style.backgroundColor = "#c8e6c9"; // light green
-            attendanceBox.style.borderColor = "#2e7d32"; // dark green
-          }
-        } else {
-          document.getElementById("attendanceBox").textContent = "Attendance: Not available";
-        }
-
-        if (!isNaN(gradeScore) && !isNaN(gradeTotal) && gradeTotal !== 0) {
-          const gradePercent = ((gradeScore / gradeTotal) * 100).toFixed(0);
-          const gradeBox = document.getElementById("gradeBox");
-          gradeBox.textContent = `Grade: ${gradeScore} / ${gradeTotal} (${gradePercent}%)`;
-        } else {
-          document.getElementById("gradeBox").textContent = "Grade: Not available";
-        }
-
-        // Update Last Updated Time
-        const now = new Date();
-        document.getElementById("updateTime").textContent =
-          `Last updated: ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
-      })
-      .catch(error => {
-        console.error("Error loading grade:", error);
-        document.getElementById("attendanceBox").textContent = "Attendance: Not available";
-        document.getElementById("gradeBox").textContent = "Grade: Not available";
-      });
   </script>
 
 </body>
