@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Assignments - Tower of Hanoi</title>
   <style>
     :root {
@@ -69,27 +69,21 @@
       color: #888;
     }
 
-    #gameContainer {
+    #hanoiGameSection {
       max-width: 800px;
-      margin: 120px auto 0;
+      margin: 140px auto 40px;
       background: var(--card-bg);
       padding: 30px;
       border-radius: 15px;
       box-shadow: var(--shadow);
+      text-align: center;
     }
 
-    #hanoiCanvas {
-      display: block;
-      margin: 0 auto;
+    canvas {
+      margin-top: 20px;
       background: #fff;
       border: 2px solid var(--border);
       border-radius: 10px;
-    }
-
-    #status {
-      text-align: center;
-      margin-top: 10px;
-      color: var(--accent);
     }
   </style>
 </head>
@@ -97,63 +91,77 @@
   <div id="gradeCard" class="locked">
     <h3>Assignment Average</h3>
     <h1>89%</h1>
-    <p>Click the padlock to play Tower of Hanoi<br>and unlock your grades!</p>
+    <p>Your grades are locked.<br> Solve the puzzle to unlock!</p>
   </div>
 
-  <div id="gameContainer">
+  <div id="hanoiGameSection">
+    <h2>🎮 Solve the Tower of Hanoi</h2>
     <canvas id="hanoiCanvas" width="600" height="300"></canvas>
-    <p id="status">Move all discs to the last peg to unlock grades!</p>
+    <p id="gameStatus">Move all discs to the rightmost peg.</p>
   </div>
 
   <script>
-    // Simple Tower of Hanoi Game (3 pegs, 3 discs)
-    const canvas = document.getElementById('hanoiCanvas');
-    const ctx = canvas.getContext('2d');
-    const pegs = [[3,2,1], [], []];
-    const diskColors = ['#ff6b6b','#feca57','#1dd1a1'];
-    let selected = null;
+    const canvas = document.getElementById("hanoiCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const numDiscs = 3;
+    const pegs = [[...Array(numDiscs).keys()].reverse(), [], []];
+    const pegX = [100, 300, 500];
+    const pegY = 250;
+    const discHeight = 20;
+
+    let dragging = false;
+    let fromPeg = null;
+    let selectedDisc = null;
 
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < 3; i++) {
-        ctx.fillStyle = '#ccc';
-        ctx.fillRect(150 + i * 150, 100, 10, 150);
+      pegX.forEach(x => {
+        ctx.fillStyle = "#aaa";
+        ctx.fillRect(x - 5, 100, 10, 150);
+      });
 
-        let y = 250;
-        for (let d of pegs[i]) {
-          const width = d * 30;
-          ctx.fillStyle = diskColors[d - 1];
-          ctx.fillRect(150 + i * 150 - width / 2 + 5, y, width, 20);
-          y -= 25;
-        }
-      }
+      pegs.forEach((peg, i) => {
+        peg.forEach((disc, j) => {
+          const width = 40 + disc * 20;
+          ctx.fillStyle = `hsl(${disc * 60}, 70%, 60%)`;
+          ctx.fillRect(pegX[i] - width / 2, pegY - (j + 1) * discHeight, width, discHeight);
+        });
+      });
     }
 
-    canvas.addEventListener('click', e => {
+    canvas.addEventListener("mousedown", (e) => {
       const x = e.offsetX;
-      const peg = Math.floor((x - 150 + 75) / 150);
-      if (peg < 0 || peg > 2) return;
-
-      if (selected === null && pegs[peg].length > 0) {
-        selected = peg;
-      } else if (selected !== null && selected !== peg) {
-        const moving = pegs[selected].slice(-1)[0];
-        const target = pegs[peg].slice(-1)[0] || Infinity;
-        if (moving < target) {
-          pegs[peg].push(pegs[selected].pop());
+      for (let i = 0; i < 3; i++) {
+        if (Math.abs(x - pegX[i]) < 50 && pegs[i].length > 0) {
+          fromPeg = i;
+          selectedDisc = pegs[i][pegs[i].length - 1];
+          dragging = true;
+          break;
         }
-        selected = null;
       }
-      draw();
-      checkWin();
     });
 
-    function checkWin() {
-      if (pegs[2].length === 3) {
-        document.getElementById('gradeCard').classList.remove('locked');
-        document.getElementById('status').textContent = 'Success! Grades unlocked.';
+    canvas.addEventListener("mouseup", (e) => {
+      if (!dragging) return;
+      dragging = false;
+
+      const x = e.offsetX;
+      let toPeg = pegX.findIndex(px => Math.abs(px - x) < 50);
+
+      if (toPeg >= 0 && (pegs[toPeg].length === 0 || selectedDisc < pegs[toPeg][pegs[toPeg].length - 1])) {
+        pegs[fromPeg].pop();
+        pegs[toPeg].push(selectedDisc);
       }
-    }
+
+      selectedDisc = null;
+      draw();
+
+      if (pegs[2].length === numDiscs) {
+        document.getElementById("gameStatus").innerText = "✅ Puzzle Solved! Grades Unlocked!";
+        document.getElementById("gradeCard").classList.remove("locked");
+      }
+    });
 
     draw();
   </script>
