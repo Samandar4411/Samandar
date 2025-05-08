@@ -5,138 +5,565 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Assignments</title>
   <style>
+    :root {
+      --primary: #1a73e8;
+      --secondary: #34a853;
+      --accent: #ea4335;
+      --light-bg: #f4f4f9;
+      --card-bg: #ffffff;
+      --border: #d1d1d1;
+      --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      --text-dark: #333;
+      --text-muted: #777;
+    }
+    
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: var(--light-bg);
       margin: 0;
       padding: 0;
+      color: var(--text-dark);
     }
-    .grade-area {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 10px;
-    }
-    .grade-box {
-      background-color: #e0f7fa;
-      padding: 10px 15px;
-      border: 2px solid #00acc1;
+    
+    /* Grade Card */
+    #gradeCard {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px;
       border-radius: 10px;
-      font-weight: bold;
-      font-size: 16px;
+      border: 1px solid var(--border);
+      background-color: var(--card-bg);
+      width: 190px;
       text-align: center;
-      min-width: 220px;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
     }
+    
+    #gradeCard.locked {
+      filter: blur(4px);
+      user-select: none;
+      pointer-events: none;
+    }
+    
+    #gradeCard h3 {
+      font-size: 14px;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #555;
+    }
+    
+    #gradeCard h1 {
+      font-size: 24px;
+      margin: 0;
+      color: var(--primary);
+      font-weight: bold;
+    }
+    
+    #gradeCard p {
+      font-size: 11px;
+      margin-top: 6px;
+      color: #888;
+    }
+    
+    #gradeDetailsBtn {
+      margin-top: 10px;
+      padding: 5px 10px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: background-color 0.3s;
+    }
+    
+    #gradeDetailsBtn:hover {
+      background-color: #0d5bba;
+    }
+    
+    #unlockGradesBtn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    /* Grade Details */
+    #gradeDetails {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 300px;
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      z-index: 2000;
+      display: none;
+      overflow: hidden;
+    }
+    
+    #gradeDetails .header {
+      background-color: var(--primary);
+      color: white;
+      padding: 12px 15px;
+      position: relative;
+    }
+    
+    #gradeDetails .header h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+    
+    #gradeDetails .close-btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    
+    #gradeDetails .content {
+      padding: 15px;
+    }
+    
+    #gradeDetails table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+    
+    #gradeDetails table th,
+    #gradeDetails table td {
+      padding: 8px 5px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    
+    #gradeDetails table th {
+      font-weight: 600;
+      color: #444;
+    }
+    
+    /* Container */
     .container {
       width: 80%;
       margin: auto;
-      padding-top: 150px;
+      padding-top: 30px;
     }
+    
     h1 {
       text-align: center;
-      color: #333;
+      color: var(--text-dark);
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 600;
     }
+    
+    /* Week cards */
     .week {
-      background-color: #fff;
+      background-color: var(--card-bg);
       padding: 20px;
-      margin: 10px 0;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin: 15px 0;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease;
+      border: 1px solid rgba(0,0,0,0.05);
     }
+    
+    .week:hover {
+      transform: translateY(-3px);
+    }
+    
     .week h2 {
       color: #444;
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 20px;
     }
+    
     .week a {
       display: inline-block;
-      margin-top: 10px;
-      color: #007bff;
+      margin-top: 5px;
+      color: var(--primary);
       text-decoration: none;
+      font-weight: 500;
+      padding: 5px 0;
+      transition: color 0.2s;
     }
+    
     .week a:hover {
+      color: #0d5bba;
       text-decoration: underline;
     }
+    
     .timestamp {
       font-size: 12px;
-      color: #777;
+      color: var(--text-muted);
       margin-top: 5px;
     }
 
-    #gradeCard {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 12px 15px;
-  border-radius: 10px;
-  border: 1px solid #d1d1d1;
-  background-color: #ffffff;
-  color: #333;
-  width: 190px;
-  text-align: center;
-  z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, color 0.3s;
-}
-
-#gradeCard h3 {
-  font-size: 14px;
-  margin-bottom: 6px;
-  font-weight: 600;
-  color: #555;
-}
-
-#gradeCard h1 {
-  font-size: 24px;
-  margin: 0;
-  color: #1a73e8; /* Google Blue */
-  font-weight: bold;
-}
-
-#gradeCard p {
-  font-size: 11px;
-  margin-top: 6px;
-  color: #888;
-}
-
-
+    /* Password Dialog */
+    .password-dialog {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 3000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      display: none;
+    }
     
+    .password-content {
+      background-color: white;
+      padding: 25px;
+      border-radius: 10px;
+      max-width: 350px;
+      width: 100%;
+      text-align: center;
+    }
+    
+    .password-input {
+      width: 100%;
+      padding: 10px;
+      margin: 15px 0;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      font-size: 16px;
+      text-align: center;
+    }
+    
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .btn {
+      padding: 8px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.3s;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: #0d5bba;
+    }
+    
+    .btn-secondary {
+      background-color: #f5f5f5;
+      color: #333;
+      border: 1px solid #ddd;
+    }
+    
+    .btn-secondary:hover {
+      background-color: #e5e5e5;
+    }
+    
+    /* Tower of Hanoi Game */
+    #gameSection {
+      padding: 30px 0;
+      background-color: rgba(26, 115, 232, 0.03);
+      border-radius: 10px;
+      margin: 40px 0;
+      border: 1px solid rgba(26, 115, 232, 0.1);
+    }
+    
+    #gameSection h2 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    
+    .game-description {
+      max-width: 700px;
+      margin: 0 auto 20px;
+      text-align: center;
+      color: #555;
+      padding: 0 20px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    
+    .game-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 0;
+    }
+    
+    .hanoi-container {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      max-width: 600px;
+      height: 200px;
+      margin: 20px 0;
+      position: relative;
+    }
+    
+    .tower {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      width: 30%;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .tower::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 10px;
+      background-color: #bbb;
+      height: 150px;
+      z-index: 1;
+      border-radius: 3px;
+    }
+    
+    .tower-base {
+      width: 100%;
+      height: 15px;
+      background-color: #999;
+      border-radius: 3px;
+      margin-top: auto;
+    }
+    
+    .disk {
+      height: 20px;
+      border-radius: 8px;
+      margin-bottom: 5px;
+      z-index: 2;
+      cursor: grab;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      font-size: 12px;
+      transition: transform 0.2s ease;
+    }
+    
+    .disk:hover {
+      transform: translateY(-2px);
+    }
+    
+    .selected {
+      transform: translateY(-5px);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .game-controls {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+    }
+    
+    .moves-counter {
+      margin-top: 15px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #444;
+    }
+
+    /* Success dialog */
+    #successDialog {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 3000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .success-content {
+      background-color: white;
+      padding: 25px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+    
+    .password-display {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary);
+      margin: 15px 0;
+      letter-spacing: 3px;
+      background-color: #f0f7ff;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px dashed #ccc;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        width: 90%;
+      }
+      
+      #gradeDetails {
+        width: 280px;
+      }
+      
+      .hanoi-container {
+        height: 180px;
+      }
+      
+      .disk {
+        height: 18px;
+      }
+      
+      .tower::before {
+        height: 120px;
+      }
+    }
   </style>
 </head>
-
 <body>
+  <!-- Grade Card Widget -->
+  <div id="gradeCard" class="locked">
+    <h3>Calculated Grade</h3>
+    <h1 id="finalGrade">Loading...</h1>
+    <p id="pointsEarned">( ... / ... )</p>
+    <button id="gradeDetailsBtn" style="display: none;">View Details</button>
+    <button id="unlockGradesBtn" title="Unlock grades">🔒</button>
+  </div>
+  
+  <!-- Grade Details Panel -->
+  <div id="gradeDetails">
+    <div class="header">
+      <h3>Grade Details</h3>
+      <button class="close-btn">&times;</button>
+    </div>
+    <div class="content">
+      <div class="overall">
+        <strong>Overall Grade:</strong> <span id="detailsGrade">Loading...</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Assignment</th>
+            <th>Points</th>
+            <th>Weight</th>
+          </tr>
+        </thead>
+        <tbody id="gradeTable">
+          <!-- Will be populated dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- Password Dialog -->
+  <div class="password-dialog" id="passwordDialog">
+    <div class="password-content">
+      <h2>Enter Password</h2>
+      <p>Please enter the password to unlock your grades:</p>
+      <input type="text" class="password-input" id="passwordInput" placeholder="Enter password">
+      <div class="button-group">
+        <button class="btn btn-primary" id="submitPasswordBtn">Submit</button>
+        <button class="btn btn-secondary" id="cancelPasswordBtn">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Success Dialog -->
+  <div id="successDialog">
+    <div class="success-content">
+      <h2>Congratulations!</h2>
+      <p>You've completed the Tower of Hanoi puzzle!</p>
+      <p>Your password to unlock grades is:</p>
+      <div class="password-display">2417574</div>
+      <button class="btn btn-primary" id="usePasswordBtn">Use Password</button>
+    </div>
+  </div>
 
-  <div id="gradeCard">
-  <h3>Calculated Grade</h3>
-  <h1 id="finalGrade">Loading...</h1>
-  <p id="pointsEarned">( ... / ... )</p>
-</div>
-
-  <!-- ✅ Assignments Section -->
+  <!-- Main Content -->
   <div class="container">
     <h1>Weekly Assignments</h1>
-
+    
+    <!-- Tower of Hanoi Game Section -->
+    <div id="gameSection">
+      <h2>Tower of Hanoi Challenge</h2>
+      <p class="game-description">Complete this puzzle to reveal the password that unlocks your grades! Move all disks from the first tower to the third tower. You can only move one disk at a time and cannot place a larger disk on top of a smaller one.</p>
+      
+      <div class="game-container">
+        <div class="hanoi-container">
+          <div class="tower" id="tower1">
+            <div class="tower-base"></div>
+          </div>
+          <div class="tower" id="tower2">
+            <div class="tower-base"></div>
+          </div>
+          <div class="tower" id="tower3">
+            <div class="tower-base"></div>
+          </div>
+        </div>
+        
+        <div class="moves-counter">Moves: <span id="moveCounter">0</span></div>
+        
+        <div class="game-controls">
+          <button class="btn btn-primary" id="resetGameBtn">Reset Game</button>
+          <button class="btn btn-secondary" id="changeDifficultyBtn">Change Difficulty</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Assignments -->
     <div class="week">
       <h2>Week 1</h2>
       <a href="https://samandar4411.github.io/Samandar/assignment1.html" target="_blank">Go to website</a>
     </div>
-
     <div class="week">
       <h2>Week 2 (Dungeon Crawl)</h2>
       <a href="https://docs.google.com/document/d/1TzNpxQp3Hemf24OyqhJfxHvGr_7pIgAbHqGxopqbMcY/edit?usp=drivesdk" target="_blank">Go to website</a>
     </div>
-
     <div class="week">
       <h2>Week 3</h2>
       <a href="https://docs.google.com/spreadsheets/d/1PmJppm1d53yRFHJKkJA6_83vCPl6d2iyfUgWPOj7Txs/edit?usp=drivesdk" target="_blank">Go to website</a>
     </div>
-
     <div class="week">
       <h2>Week 6</h2>
       <a href="https://abu-assignments.netlify.app/encryption_playground.html" target="_blank">Go to website</a>
     </div>
-<div class="week">
+    <div class="week">
       <h2>Week 6 feedback</h2>
       <a href="https://abu-assignments.netlify.app/team101_documentation.html" target="_blank">Go to website</a>
     </div>
@@ -146,22 +573,258 @@
     </div>
   </div>
 
-  <!-- ✅ JavaScript to Fetch Grade and Attendance -->
   <script>
-
+    // Elements
+    const gradeCard = document.getElementById('gradeCard');
+    const finalGrade = document.getElementById('finalGrade');
+    const pointsEarned = document.getElementById('pointsEarned');
+    const detailsGrade = document.getElementById('detailsGrade');
+    const gradeTable = document.getElementById('gradeTable');
+    const gradeDetailsBtn = document.getElementById('gradeDetailsBtn');
+    const gradeDetails = document.getElementById('gradeDetails');
+    const closeDetailsBtn = document.querySelector('.close-btn');
+    const unlockGradesBtn = document.getElementById('unlockGradesBtn');
+    const passwordDialog = document.getElementById('passwordDialog');
+    const passwordInput = document.getElementById('passwordInput');
+    const submitPasswordBtn = document.getElementById('submitPasswordBtn');
+    const cancelPasswordBtn = document.getElementById('cancelPasswordBtn');
+    const successDialog = document.getElementById('successDialog');
+    const usePasswordBtn = document.getElementById('usePasswordBtn');
+    
+    // Tower of Hanoi Elements
+    const tower1 = document.getElementById('tower1');
+    const tower2 = document.getElementById('tower2');
+    const tower3 = document.getElementById('tower3');
+    const moveCounter = document.getElementById('moveCounter');
+    const resetGameBtn = document.getElementById('resetGameBtn');
+    const changeDifficultyBtn = document.getElementById('changeDifficultyBtn');
+    
+    // Hanoi Game Variables
+    let selectedDisk = null;
+    let selectedTower = null;
+    let moves = 0;
+    let diskCount = 3;
+    let gameCompleted = false;
+    const correctPassword = "2417574"; // Fixed password as requested
+    
+    // Initialize the game
+    function initGame() {
+      // Clear all towers
+      while (tower1.childElementCount > 1) {
+        tower1.removeChild(tower1.firstChild);
+      }
+      while (tower2.childElementCount > 1) {
+        tower2.removeChild(tower2.firstChild);
+      }
+      while (tower3.childElementCount > 1) {
+        tower3.removeChild(tower3.firstChild);
+      }
+      
+      // Add disks to first tower
+      for (let i = diskCount; i >= 1; i--) {
+        const disk = document.createElement('div');
+        disk.className = 'disk';
+        disk.style.width = `${i * 25 + 35}px`;
+        disk.style.backgroundColor = getRandomColor();
+        disk.dataset.size = i;
+        disk.textContent = i;
+        tower1.insertBefore(disk, tower1.firstChild);
+      }
+      
+      moves = 0;
+      moveCounter.textContent = moves;
+      gameCompleted = false;
+      selectedDisk = null;
+      selectedTower = null;
+    }
+    
+    function getRandomColor() {
+      const colors = [
+        '#1a73e8', '#34a853', '#fbbc04', '#ea4335', 
+        '#5f6368', '#4285f4', '#0f9d58', '#ab47bc'
+      ];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+    
+    // Handle tower clicks
+    function handleTowerClick(e) {
+      const tower = e.currentTarget;
+      
+      // Skip if game is already completed
+      if (gameCompleted) {
+        return;
+      }
+      
+      // If no disk is selected, try to select one
+      if (!selectedDisk) {
+        // Skip if tower is empty (only base exists)
+        if (tower.childElementCount <= 1) {
+          return;
+        }
+        
+        // Select the top disk (first child)
+        selectedDisk = tower.firstChild;
+        selectedDisk.classList.add('selected');
+        selectedTower = tower;
+      } else {
+        // We have a selected disk, try to move it
+        const targetTower = tower;
+        
+        // Skip if same tower
+        if (targetTower === selectedTower) {
+          selectedDisk.classList.remove('selected');
+          selectedDisk = null;
+          selectedTower = null;
+          return;
+        }
+        
+        // Check if the move is valid
+        const isValidMove = checkValidMove(selectedDisk, targetTower);
+        
+        if (isValidMove) {
+          // Move the disk
+          selectedDisk.classList.remove('selected');
+          selectedTower.removeChild(selectedDisk);
+          targetTower.insertBefore(selectedDisk, targetTower.firstChild);
+          
+          // Increment moves counter
+          moves++;
+          moveCounter.textContent = moves;
+          
+          // Check if game is complete (all disks moved to third tower)
+          if (tower3.childElementCount - 1 === diskCount) {
+            gameCompleted = true;
+            setTimeout(() => {
+              showSuccessDialog();
+            }, 500);
+          }
+        }
+        
+        // Reset selection
+        selectedDisk = null;
+        selectedTower = null;
+      }
+    }
+    
+    function checkValidMove(disk, targetTower) {
+      // Check if target tower is empty or top disk is larger
+      if (targetTower.childElementCount <= 1) {
+        return true;
+      }
+      
+      const targetTopDisk = targetTower.firstChild;
+      return parseInt(disk.dataset.size) < parseInt(targetTopDisk.dataset.size);
+    }
+    
+    // Show success dialog
+    function showSuccessDialog() {
+      successDialog.style.display = 'flex';
+    }
+    
+    // Unlock grades function
+    function unlockGrades() {
+      gradeCard.classList.remove('locked');
+      unlockGradesBtn.innerHTML = '🔓';
+      unlockGradesBtn.style.backgroundColor = var(--secondary);
+      gradeDetailsBtn.style.display = 'block';
+    }
+    
+    // ---- Event Listeners ----
+    
+    // Tower of Hanoi game
+    tower1.addEventListener('click', handleTowerClick);
+    tower2.addEventListener('click', handleTowerClick);
+    tower3.addEventListener('click', handleTowerClick);
+    
+    resetGameBtn.addEventListener('click', () => {
+      initGame();
+    });
+    
+    changeDifficultyBtn.addEventListener('click', () => {
+      if (diskCount === 3) {
+        diskCount = 4;
+      } else if (diskCount === 4) {
+        diskCount = 5;
+      } else {
+        diskCount = 3;
+      }
+      initGame();
+    });
+    
+    // Password handling
+    unlockGradesBtn.addEventListener('click', () => {
+      passwordDialog.style.display = 'flex';
+    });
+    
+    submitPasswordBtn.addEventListener('click', () => {
+      if (passwordInput.value === correctPassword) {
+        passwordDialog.style.display = 'none';
+        unlockGrades();
+        passwordInput.value = '';
+      } else {
+        alert('Incorrect password! Complete the Tower of Hanoi challenge to reveal the correct password.');
+      }
+    });
+    
+    cancelPasswordBtn.addEventListener('click', () => {
+      passwordDialog.style.display = 'none';
+      passwordInput.value = '';
+    });
+    
+    usePasswordBtn.addEventListener('click', () => {
+      successDialog.style.display = 'none';
+      unlockGrades();
+    });
+    
+    // Grade details
+    gradeDetailsBtn.addEventListener('click', () => {
+      gradeDetails.style.display = 'block';
+    });
+    
+    closeDetailsBtn.addEventListener('click', () => {
+      gradeDetails.style.display = 'none';
+    });
+    
+    // Fetch grades from API
     fetch("https://script.google.com/macros/s/AKfycbyTE1JCrup-cX-sJi3jLVzqG0UrW9M76eOtPZMIid2YusMyqoHfk8BZtMkXq2yury_G/exec")
-  .then(response => response.json())
-  .then(data => {
-    document.getElementById('finalGrade').textContent = data.finalGrade + "%";
-    document.getElementById('pointsEarned').textContent = `${data.earnedPoints} / ${data.totalPoints}`;
-  })
-  .catch(error => {
-    document.getElementById('finalGrade').textContent = "Error!";
-    console.error(error);
-  });
-
-
+      .then(response => response.json())
+      .then(data => {
+        finalGrade.textContent = data.finalGrade + "%";
+        pointsEarned.textContent = `${data.earnedPoints} / ${data.totalPoints}`;
+        detailsGrade.textContent = data.finalGrade + "%";
+        
+        // Populate grade details table
+        // Note: This is example data since the actual JSON structure is unknown
+        // You'll need to adjust this based on what your API returns
+        const assignments = [
+          { name: "Week 1 Assignment", points: "18/20", weight: "15%" },
+          { name: "Week 2 Dungeon Crawl", points: "23/25", weight: "20%" },
+          { name: "Week 3 Assignment", points: "19/20", weight: "15%" },
+          { name: "Week 6 Assignment", points: "24/25", weight: "25%" },
+          { name: "Week 7 Assignment", points: "22/25", weight: "25%" }
+        ];
+        
+        // Clear existing table
+        gradeTable.innerHTML = '';
+        
+        // Add rows
+        assignments.forEach(assignment => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${assignment.name}</td>
+            <td>${assignment.points}</td>
+            <td>${assignment.weight}</td>
+          `;
+          gradeTable.appendChild(row);
+        });
+      })
+      .catch(error => {
+        finalGrade.textContent = "Error!";
+        console.error(error);
+      });
+    
+    // Initialize game on page load
+    initGame();
   </script>
-
 </body>
 </html>
