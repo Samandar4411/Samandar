@@ -3,167 +3,153 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Assignments - Tower of Hanoi</title>
+  <title>Assignments</title>
   <style>
-    :root {
-      --primary: #4e54c8;
-      --primary-light: #8f94fb;
-      --secondary: #34a853;
-      --accent: #ea4335;
-      --light-bg: #f8f9fa;
-      --card-bg: #ffffff;
-      --border: #e1e1e1;
-      --shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-      --text-dark: #333;
-      --text-muted: #777;
-    }
-
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      font-family: Arial, sans-serif;
+      background-color: 
+#f4f4f9;
       margin: 0;
       padding: 0;
-      color: var(--text-dark);
-      min-height: 100vh;
     }
-
-    #gradeCard {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 20px;
-      border-radius: 15px;
-      background: linear-gradient(145deg, #ffffff, #f0f0f0);
-      width: 200px;
-      text-align: center;
-      z-index: 1000;
-      box-shadow: var(--shadow);
-      transition: all 0.3s ease;
+    .grade-area {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
     }
-
-    #gradeCard.locked {
-      filter: blur(4px);
-      user-select: none;
-      pointer-events: none;
-    }
-
-    #gradeCard h3 {
-      font-size: 14px;
-      margin-bottom: 6px;
-      color: #555;
-    }
-
-    #gradeCard h1 {
-      font-size: 28px;
-      margin: 5px 0;
-      background: linear-gradient(to right, var(--primary), var(--primary-light));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      font-weight: bold;
-    }
-
-    #gradeCard p {
-      font-size: 11px;
-      margin-top: 6px;
-      color: #888;
-    }
-
-    #hanoiGameSection {
-      max-width: 800px;
-      margin: 140px auto 40px;
-      background: var(--card-bg);
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-      text-align: center;
-    }
-
-    canvas {
-      margin-top: 20px;
-      background: #fff;
-      border: 2px solid var(--border);
+    .grade-box {
+      background-color: 
+#e0f7fa;
+      padding: 10px 15px;
+      border: 2px solid 
+#00acc1;
       border-radius: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      text-align: center;
+      min-width: 220px;
     }
+    .container {
+      width: 80%;
+      margin: auto;
+      padding-top: 150px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .week {
+      background-color: #fff;
+      padding: 20px;
+      margin: 10px 0;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .week h2 {
+      color: #444;
+    }
+    .week a {
+      display: inline-block;
+      margin-top: 10px;
+      color: 
+#007bff;
+      text-decoration: none;
+    }
+    .week a:hover {
+      text-decoration: underline;
+    }
+    .timestamp {
+      font-size: 12px;
+      color: #777;
+      margin-top: 5px;
+    }
+    #gradeCard {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid 
+#d1d1d1;
+  background-color: 
+#ffffff;
+  color: #333;
+  width: 190px;
+  text-align: center;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
+}
+#gradeCard h3 {
+  font-size: 14px;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #555;
+}
+#gradeCard h1 {
+  font-size: 24px;
+  margin: 0;
+  color: 
+#1a73e8; /* Google Blue */
+  font-weight: bold;
+}
+#gradeCard p {
+  font-size: 11px;
+  margin-top: 6px;
+  color: #888;
+}
   </style>
 </head>
 <body>
-  <div id="gradeCard" class="locked">
-    <h3>Assignment Average</h3>
-    <h1>89%</h1>
-    <p>Your grades are locked.<br> Solve the puzzle to unlock!</p>
+  <div id="gradeCard">
+  <h3>Calculated Grade</h3>
+  <h1 id="finalGrade">Loading...</h1>
+  <p id="pointsEarned">( ... / ... )</p>
+</div>
+  <!-- ✅ Assignments Section -->
+  <div class="container">
+    <h1>Weekly Assignments</h1>
+    <div class="week">
+      <h2>Week 1</h2>
+      <a href="https://samandar4411.github.io/Samandar/assignment1.html" target="_blank">Go to website</a>
+    </div>
+    <div class="week">
+      <h2>Week 2 (Dungeon Crawl)</h2>
+      <a href="https://docs.google.com/document/d/1TzNpxQp3Hemf24OyqhJfxHvGr_7pIgAbHqGxopqbMcY/edit?usp=drivesdk" target="_blank">Go to website</a>
+    </div>
+    <div class="week">
+      <h2>Week 3</h2>
+      <a href="https://docs.google.com/spreadsheets/d/1PmJppm1d53yRFHJKkJA6_83vCPl6d2iyfUgWPOj7Txs/edit?usp=drivesdk" target="_blank">Go to website</a>
+    </div>
+    <div class="week">
+      <h2>Week 6</h2>
+      <a href="https://abu-assignments.netlify.app/encryption_playground.html" target="_blank">Go to website</a>
+    </div>
+<div class="week">
+      <h2>Week 6 feedback</h2>
+      <a href="https://abu-assignments.netlify.app/team101_documentation.html" target="_blank">Go to website</a>
+    </div>
+    <div class="week">
+      <h2>Week 7</h2>
+      <a href="https://docs.google.com/document/d/1VSeIZcXTnhK688wjcoC1dJOZbhTmzPl8HsC58pdLlHE/edit?usp=sharing" target="_blank">Go to website</a>
+    </div>
   </div>
-
-  <div id="hanoiGameSection">
-    <h2>🎮 Solve the Tower of Hanoi</h2>
-    <canvas id="hanoiCanvas" width="600" height="300"></canvas>
-    <p id="gameStatus">Move all discs to the rightmost peg.</p>
-  </div>
-
+  <!-- ✅ JavaScript to Fetch Grade and Attendance -->
   <script>
-    const canvas = document.getElementById("hanoiCanvas");
-    const ctx = canvas.getContext("2d");
-
-    const numDiscs = 3;
-    const pegs = [[...Array(numDiscs).keys()].reverse(), [], []];
-    const pegX = [100, 300, 500];
-    const pegY = 250;
-    const discHeight = 20;
-
-    let dragging = false;
-    let fromPeg = null;
-    let selectedDisc = null;
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      pegX.forEach(x => {
-        ctx.fillStyle = "#aaa";
-        ctx.fillRect(x - 5, 100, 10, 150);
-      });
-
-      pegs.forEach((peg, i) => {
-        peg.forEach((disc, j) => {
-          const width = 40 + disc * 20;
-          ctx.fillStyle = `hsl(${disc * 60}, 70%, 60%)`;
-          ctx.fillRect(pegX[i] - width / 2, pegY - (j + 1) * discHeight, width, discHeight);
-        });
-      });
-    }
-
-    canvas.addEventListener("mousedown", (e) => {
-      const x = e.offsetX;
-      for (let i = 0; i < 3; i++) {
-        if (Math.abs(x - pegX[i]) < 50 && pegs[i].length > 0) {
-          fromPeg = i;
-          selectedDisc = pegs[i][pegs[i].length - 1];
-          dragging = true;
-          break;
-        }
-      }
-    });
-
-    canvas.addEventListener("mouseup", (e) => {
-      if (!dragging) return;
-      dragging = false;
-
-      const x = e.offsetX;
-      let toPeg = pegX.findIndex(px => Math.abs(px - x) < 50);
-
-      if (toPeg >= 0 && (pegs[toPeg].length === 0 || selectedDisc < pegs[toPeg][pegs[toPeg].length - 1])) {
-        pegs[fromPeg].pop();
-        pegs[toPeg].push(selectedDisc);
-      }
-
-      selectedDisc = null;
-      draw();
-
-      if (pegs[2].length === numDiscs) {
-        document.getElementById("gameStatus").innerText = "✅ Puzzle Solved! Grades Unlocked!";
-        document.getElementById("gradeCard").classList.remove("locked");
-      }
-    });
-
-    draw();
+    fetch("https://script.google.com/macros/s/AKfycbyTE1JCrup-cX-sJi3jLVzqG0UrW9M76eOtPZMIid2YusMyqoHfk8BZtMkXq2yury_G/exec")
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('finalGrade').textContent = data.finalGrade + "%";
+    document.getElementById('pointsEarned').textContent = ${data.earnedPoints} / ${data.totalPoints};
+  })
+  .catch(error => {
+    document.getElementById('finalGrade').textContent = "Error!";
+    console.error(error);
+  });
   </script>
 </body>
 </html>
