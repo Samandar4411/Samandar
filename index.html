@@ -140,16 +140,16 @@
   </div>
   <!-- ✅ JavaScript to Fetch Grade and Attendance -->
   <script>
-    fetch("https://script.google.com/macros/s/AKfycbyTE1JCrup-cX-sJi3jLVzqG0UrW9M76eOtPZMIid2YusMyqoHfk8BZtMkXq2yury_G/exec")
-  .then(response => response.json())
-  .then(data => {
-    document.getElementById('finalGrade').textContent = data.finalGrade + "%";
-    document.getElementById('pointsEarned').textContent = ${data.earnedPoints} / ${data.totalPoints};
-  })
-  .catch(error => {
-    document.getElementById('finalGrade').textContent = "Error!";
-    console.error(error);
-  });
-  </script>
+  fetch("https://script.google.com/macros/s/AKfycbyTE1JCrup-cX-sJi3jLVzqG0UrW9M76eOtPZMIid2YusMyqoHfk8BZtMkXq2yury_G/exec")
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('finalGrade').textContent = data.finalGrade + "%";
+      document.getElementById('pointsEarned').textContent = `${data.earnedPoints} / ${data.totalPoints}`;
+    })
+    .catch(error => {
+      document.getElementById('finalGrade').textContent = "Error!";
+      console.error(error);
+    });
+</script>
 </body>
 </html>
