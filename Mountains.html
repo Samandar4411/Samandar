@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mountains of Busan</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #265073;
+      color: white;
+      padding: 2em;
+      text-align: center;
+    }
+    header h1 {
+      margin-bottom: 0.5em;
+    }
+    .overview {
+      background: #ffffff;
+      padding: 2em;
+      margin: 2em auto;
+      max-width: 900px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .mountain {
+      background: #ffffff;
+      margin: 2em auto;
+      max-width: 900px;
+      padding: 1.5em;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .mountain img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+    button {
+      margin-top: 1em;
+      padding: 0.7em 1.5em;
+      font-size: 1em;
+      background-color: #41729F;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #356082;
+    }
+    .info {
+      display: none;
+      margin-top: 1em;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mountains of Busan</h1>
+    <p>Discover the 10 highest mountains in Busan, each over 200 meters tall. Learn about their unique features and enjoy beautiful images of each peak.</p>
+  </header>
+
+  <section class="overview">
+    <h2>Documentation</h2>
+    <p>
+      This project highlights the top 10 mountains in Busan exceeding 200 meters in height. I selected this topic during Week 5 idea sourcing and developed a website showing each mountain with images and interactive buttons that reveal brief, useful facts. I researched heights, features, and locations of each mountain. Future goals include adding hiking trails, maps, and difficulty levels. This was completed independently as part of Week 11's solo project challenge.
+    </p>
+  </section>
+
+  <div class="mountain">
+    <h2>1. Geumjeongsan (801.5 m)</h2>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Geumjeongsan_at_Sunset.jpg/640px-Geumjeongsan_at_Sunset.jpg" alt="Geumjeongsan">
+    <button onclick="document.getElementById('info1').style.display='block'">Show Info</button>
+    <div class="info" id="info1">
+      <p>Geumjeongsan is the tallest mountain in Busan, known for its historic fortress, temples, and scenic hiking trails with views over the city.</p>
+    </div>
+  </div>
+
+  <div class="mountain">
+    <h2>2. Baegyangsan (641 m)</h2>
+    <img src="https://www.koreatodo.com/uploads/8/2/2/4/82248408/baegyangsan-busan_orig.jpg" alt="Baegyangsan">
+    <button onclick="document.getElementById('info2').style.display='block'">Show Info</button>
+    <div class="info" id="info2">
+      <p>Baegyangsan offers panoramic city views and is a favorite for locals. It's ideal for sunrise hikes and features observation platforms.</p>
+    </div>
+  </div>
+
+  <div class="mountain">
+    <h2>3. Hwangnyeongsan (427 m)</h2>
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/17/b5/52/hwangnyeongsan-mountain.jpg" alt="Hwangnyeongsan">
+    <button onclick="document.getElementById('info3').style.display='block'">Show Info</button>
+    <div class="info" id="info3">
+      <p>Hwangnyeongsan provides nighttime views of Busan and has a popular observatory deck. It’s easily accessible and offers gentle trails.</p>
+    </div>
+  </div>
+
+  <div class="mountain">
+    <h2>4. Jangsan (634 m)</h2>
+    <img src="https://pbs.twimg.com/media/Dy6kqqDUUAEH4GC.jpg" alt="Jangsan">
+    <button onclick="document.getElementById('info4').style.display='block'">Show Info</button>
+    <div class="info" id="info4">
+      <p>Located near Haeundae, Jangsan offers spectacular views of the coastline. The peak is ideal for watching the sunrise over the ocean.</p>
+    </div>
+  </div>
+
+  <div class="mountain">
+    <h2>5. Eomgwangsan (594 m)</h2>
+    <img src="https://i.namu.wiki/i/GwCt3K8K7ppN80RNdTi6S4h8ASgb8JXt8DL05URVAZtZLFxJLLx7FzyuVFTN53Gu4vJCIH6TZnEXuYe1SHG4IQ.webp" alt="Eomgwangsan">
+    <button onclick="document.getElementById('info5').style.display='block'">Show Info</button>
+    <div class="info" id="info5">
+      <p>Eomgwangsan is part of the mountain chain extending from Baegyangsan. It is less crowded and perfect for quiet hikes.</p>
+    </div>
+  </div>
+
+  <div class="mountain">
+    <h2>6. Gudeoksan (560 m)</h2>
+    <img src="https://blog.kakaocdn.net/dn/n1lqa/btqCy0UZqkU/eyZW8aUKvKA9U94gkhYW41/img.jpg" alt="Gudeoksan">
+    <button onclick="document.getElementById('info6').style.display='block'">Show Info</button>
+    <div class="info" id="info6">
+      <p>Gudeoksan borders Seo-gu and is famous for its nature reserve and panoramic views of the western parts of Busan.</p>
+    </div>
+  </div>
+
+  <div class="mountain">
+    <h2>7. Seunghaksan (469 m)</h2>
+    <img src="https://cdn.imweb.me/upload/S202110159a00be081d9f8/07efc8e158353.jpg" alt="Seunghaksan">
+    <button onclick="document.getElementById('info7').style.display='block'">Show Info</button>
+    <div class="info" id="info7">
+      <p>Seunghaksan is popular among locals for quick getaways and peaceful hiking. It offers great views of Busan’s inner districts.</p>
+    </div>
+  </div>
+
+  <div class="mountain">
+    <h2>8. Daeunsan (375 m)</h2>
+    <img src="https://blog.kakaocdn.net/dn/c55KOo/btqCzBiLzFq/TrmgtKR7uFtGCcMXUVzTD1/img.jpg" alt="Daeunsan">
+    <button onclick="document.getElementById('info8').style.display='block'">Show Info</button>
+    <div class="info" id="info8">
+      <p>Daeunsan is close to residential areas and is perfect for beginners. It's known for well-maintained paths and spring flowers.</p>
+    </div>
+  </div>
+
+  <div class="mountain">
+    <h2>9. Cheolmasan (380 m)</h2>
+    <img src="https://cdn.gjdream.com/news/photo/201812/47043_36610_3131.jpg" alt="Cheolmasan">
+    <button onclick="document.getElementById('info9').style.display='block'">Show Info</button>
+    <div class="info" id="info9">
+      <p>Cheolmasan lies between urban and rural areas. It offers peaceful hiking, temples, and seasonal wildflowers.</p>
+    </div>
+  </div>
+
+  <div class="mountain">
+    <h2>10. Sinseondae (306 m)</h2>
+    <img src="https://i.namu.wiki/i/oE-pzE9TA-j6Dn6gB68h9rkOBzRa7iK3DH1wO8msNlv7y7F_L1ZC0NGtZZWVE8wI6XfOupT6UHZ-i7Lu8KtJsw.webp" alt="Sinseondae">
+    <button onclick="document.getElementById('info10').style.display='block'">Show Info</button>
+    <div class="info" id="info10">
+      <p>Sinseondae is known for scenic rock formations and spiritual legends. It's near Taejongdae and offers coastal views.</p>
+    </div>
+  </div>
+
+</body>
+</html>
