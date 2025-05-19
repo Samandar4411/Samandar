@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Assignments</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: 
-#f4f4f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #fce4ec);
       margin: 0;
       padding: 0;
     }
+
     .grade-area {
       position: absolute;
       top: 10px;
@@ -21,139 +21,169 @@
       align-items: flex-end;
       gap: 10px;
     }
+
     .grade-box {
-      background-color: 
-#e0f7fa;
+      background-color: #e1f5fe;
       padding: 10px 15px;
-      border: 2px solid 
-#00acc1;
+      border: 2px solid #00bcd4;
       border-radius: 10px;
       font-weight: bold;
       font-size: 16px;
       text-align: center;
       min-width: 220px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
+
     .container {
-      width: 80%;
+      width: 85%;
       margin: auto;
       padding-top: 150px;
     }
+
     h1 {
       text-align: center;
-      color: #333;
+      color: #222;
+      font-size: 36px;
+      margin-bottom: 30px;
     }
+
     .week {
-      background-color: #fff;
-      padding: 20px;
-      margin: 10px 0;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      background: #ffffffcc;
+      backdrop-filter: blur(4px);
+      padding: 25px;
+      margin: 15px 0;
+      border-radius: 15px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease-in-out;
     }
+
+    .week:hover {
+      transform: scale(1.02);
+    }
+
     .week h2 {
-      color: #444;
+      color: #333;
+      font-size: 22px;
+      margin-bottom: 10px;
     }
+
     .week a {
       display: inline-block;
       margin-top: 10px;
-      color: 
-#007bff;
+      padding: 8px 15px;
+      background-color: #1976d2;
+      color: #fff;
       text-decoration: none;
+      border-radius: 6px;
+      transition: background-color 0.3s;
     }
+
     .week a:hover {
-      text-decoration: underline;
+      background-color: #0d47a1;
     }
+
     .timestamp {
       font-size: 12px;
-      color: #777;
+      color: #888;
       margin-top: 5px;
     }
+
     #gradeCard {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 12px 15px;
-  border-radius: 10px;
-  border: 1px solid 
-#d1d1d1;
-  background-color: 
-#ffffff;
-  color: #333;
-  width: 190px;
-  text-align: center;
-  z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, color 0.3s;
-}
-#gradeCard h3 {
-  font-size: 14px;
-  margin-bottom: 6px;
-  font-weight: 600;
-  color: #555;
-}
-#gradeCard h1 {
-  font-size: 24px;
-  margin: 0;
-  color: 
-#1a73e8; /* Google Blue */
-  font-weight: bold;
-}
-#gradeCard p {
-  font-size: 11px;
-  margin-top: 6px;
-  color: #888;
-}
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 18px;
+      border-radius: 12px;
+      border: 1px solid #cfd8dc;
+      background-color: #ffffff;
+      color: #333;
+      width: 210px;
+      text-align: center;
+      z-index: 1000;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #gradeCard h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    #gradeCard h1 {
+      font-size: 28px;
+      margin: 0;
+      color: #1a73e8;
+      font-weight: bold;
+    }
+
+    #gradeCard p {
+      font-size: 12px;
+      margin-top: 6px;
+      color: #777;
+    }
   </style>
 </head>
 <body>
   <div id="gradeCard">
-  <h3>Calculated Grade</h3>
-  <h1 id="finalGrade">Loading...</h1>
-  <p id="pointsEarned">( ... / ... )</p>
-</div>
+    <h3>Calculated Grade</h3>
+    <h1 id="finalGrade">Loading...</h1>
+    <p id="pointsEarned">( ... / ... )</p>
+  </div>
+
   <!-- ✅ Assignments Section -->
   <div class="container">
     <h1>Weekly Assignments</h1>
+
     <div class="week">
       <h2>Week 1</h2>
       <a href="https://samandar4411.github.io/Samandar/assignment1.html" target="_blank">Go to website</a>
     </div>
+
     <div class="week">
       <h2>Week 2 (Dungeon Crawl)</h2>
       <a href="https://docs.google.com/document/d/1TzNpxQp3Hemf24OyqhJfxHvGr_7pIgAbHqGxopqbMcY/edit?usp=drivesdk" target="_blank">Go to website</a>
     </div>
+
     <div class="week">
       <h2>Week 3</h2>
       <a href="https://drive.google.com/drive/folders/1WZgXN9zD9c-vYxoaakblMwcIXzihvCp0?usp=share_link" target="_blank">Go to website</a>
     </div>
-<div class="week">
+
+    <div class="week">
       <h2>Week 6 feedback</h2>
       <a href="https://abu-assignments.netlify.app/team101_documentation.html" target="_blank">Go to website</a>
     </div>
+
     <div class="week">
       <h2>Week 7</h2>
       <a href="https://samandar4411.github.io/Samandar/appsscript.html" target="_blank">Go to website</a>
     </div>
-     <div class="week">
+
+    <div class="week">
       <h2>Week 10</h2>
       <a href="https://samandar4411.github.io/Samandar/lumen.html" target="_blank">Go to website</a>
     </div>
+
     <div class="week">
       <h2>Week 11</h2>
       <a href="https://samandar4411.github.io/Samandar/Mountains.html" target="_blank">Go to website</a>
     </div>
   </div>
+
   <!-- ✅ JavaScript to Fetch Grade and Attendance -->
   <script>
-  fetch("https://script.google.com/macros/s/AKfycbyTE1JCrup-cX-sJi3jLVzqG0UrW9M76eOtPZMIid2YusMyqoHfk8BZtMkXq2yury_G/exec")
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById('finalGrade').textContent = data.finalGrade + "%";
-      document.getElementById('pointsEarned').textContent = `${data.earnedPoints} / ${data.totalPoints}`;
-    })
-    .catch(error => {
-      document.getElementById('finalGrade').textContent = "Error!";
-      console.error(error);
-    });
-</script>
+    fetch("https://script.google.com/macros/s/AKfycbyTE1JCrup-cX-sJi3jLVzqG0UrW9M76eOtPZMIid2YusMyqoHfk8BZtMkXq2yury_G/exec")
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('finalGrade').textContent = data.finalGrade + "%";
+        document.getElementById('pointsEarned').textContent = `${data.earnedPoints} / ${data.totalPoints}`;
+      })
+      .catch(error => {
+        document.getElementById('finalGrade').textContent = "Error!";
+        console.error(error);
+      });
+  </script>
 </body>
 </html>
