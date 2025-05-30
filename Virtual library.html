@@ -3,107 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual Library</title>
+    <title>Assignment Webpage</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
             text-align: center;
-            padding: 20px;
         }
-        h1 {
+
+        header {
+            background-color: #343a40;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            color: white;
+            margin: 0 0 10px;
+            font-size: 32px;
+        }
+
+        .link-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .link-buttons a {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .link-buttons a:hover {
+            background-color: #0056b3;
+        }
+
+        .content {
+            padding: 40px 20px;
+        }
+
+        .content p {
+            font-size: 18px;
             color: #333;
         }
-        input {
-            width: 80%;
-            padding: 10px;
-            margin-bottom: 20px;
-            font-size: 16px;
+
+        .funny-section {
+            margin-top: 40px;
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            padding: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            border-radius: 10px;
         }
-        table {
-            width: 90%;
-            margin: auto;
-            border-collapse: collapse;
-            background: white;
+
+        .funny-section h2 {
+            margin-top: 0;
         }
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
+
+        .funny-section img {
+            max-width: 300px;
+            border-radius: 10px;
+            margin-top: 15px;
         }
-        th {
-            background: #007BFF;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background: #f9f9f9;
+
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #dee2e6;
+            font-size: 14px;
+            color: #555;
         }
     </style>
 </head>
 <body>
 
-    <h1>Virtual Library</h1>
-    <input type="text" id="searchBox" placeholder="Search for books..." onkeyup="searchBooks()">
+<header>
+    <h1>📚 My Assignment Hub</h1>
+    <div class="link-buttons">
+        <a href="https://docs.google.com/document/d/1R0ZNmCfca4WP6y_iWbWP3cT19aJOgoHvnwxDMcQ8nLM/edit?usp=sharing" target="_blank">📄 The Proof</a>
+        <a href="https://docs.google.com/document/d/1Lc61YhIxTQHgmG0TvL0QrHUhll1RguTRjRxMisa9dks/edit?usp=sharing" target="_blank">📘 Documentation</a>
+    </div>
+</header>
 
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Genre</th>
-                <th>Year</th>
-                <th>Available</th>
-                <th>Last Checkout</th>
-            </tr>
-        </thead>
-        <tbody id="bookTable"></tbody>
-    </table>
+<div class="content">
+    <p>Welcome to my assignment page. Click the links above to view the submitted documents. More updates will be added soon!</p>
+</div>
 
-    <script>
-        const books = [
-            { id: 1, title: "Pride and Prejudice", author: "Jane Austen", genre: "Classics", year: 1813, available: "TRUE", lastCheckout: "2025-03-01" },
-            { id: 2, title: "Moby Dick", author: "Herman Melville", genre: "Classics", year: 1851, available: "TRUE", lastCheckout: "2025-02-20" },
-            { id: 3, title: "1984", author: "George Orwell", genre: "Classics", year: 1949, available: "TRUE", lastCheckout: "2025-03-15" },
-            { id: 4, title: "To Kill a Mockingbird", author: "Harper Lee", genre: "Classics", year: 1960, available: "TRUE", lastCheckout: "2025-03-10" },
-            { id: 5, title: "The Great Gatsby", author: "F. Scott Fitzgerald", genre: "Classics", year: 1925, available: "TRUE", lastCheckout: "2025-03-05" },
-            { id: 6, title: "Charlotte's Web", author: "E.B. White", genre: "Children's Books", year: 1952, available: "TRUE", lastCheckout: "2025-03-12" },
-            { id: 7, title: "The Very Hungry Caterpillar", author: "Eric Carle", genre: "Children's Books", year: 1969, available: "TRUE", lastCheckout: "2025-02-28" },
-            { id: 8, title: "Matilda", author: "Roald Dahl", genre: "Children's Books", year: 1988, available: "TRUE", lastCheckout: "2025-03-08" },
-            { id: 9, title: "Where the Wild Things Are", author: "Maurice Sendak", genre: "Children's Books", year: 1963, available: "TRUE", lastCheckout: "2025-02-18" },
-            { id: 10, title: "Goodnight Moon", author: "Margaret Wise Brown", genre: "Children's Books", year: 1947, available: "TRUE", lastCheckout: "2025-03-07" },
-            { id: 11, title: "Harry Potter and the Sorcerer's Stone", author: "J.K. Rowling", genre: "Young Adult / Fantasy", year: 1997, available: "TRUE", lastCheckout: "2025-03-08" },
-            { id: 12, title: "The Hunger Games", author: "Suzanne Collins", genre: "Young Adult / Fantasy", year: 2008, available: "TRUE", lastCheckout: "2025-02-25" },
-            { id: 13, title: "Eragon", author: "Christopher Paolini", genre: "Young Adult / Fantasy", year: 2002, available: "TRUE", lastCheckout: "2025-03-05" },
-            { id: 14, title: "Percy Jackson: The Lightning Thief", author: "Rick Riordan", genre: "Young Adult / Fantasy", year: 2005, available: "TRUE", lastCheckout: "2025-03-02" },
-            { id: 15, title: "A Wrinkle in Time", author: "Madeleine L'Engle", genre: "Young Adult / Fantasy", year: 1962, available: "TRUE", lastCheckout: "2025-03-06" },
-            { id: 16, title: "The Girl with the Dragon Tattoo", author: "Stieg Larsson", genre: "Mystery / Thriller", year: 2005, available: "TRUE", lastCheckout: "2025-02-15" },
-            { id: 17, title: "Gone Girl", author: "Gillian Flynn", genre: "Mystery / Thriller", year: 2012, available: "TRUE", lastCheckout: "2025-03-09" },
-            { id: 18, title: "The Da Vinci Code", author: "Dan Brown", genre: "Mystery / Thriller", year: 2003, available: "TRUE", lastCheckout: "2025-03-04" },
-            { id: 19, title: "And Then There Were None", author: "Agatha Christie", genre: "Mystery / Thriller", year: 1939, available: "TRUE", lastCheckout: "2025-03-07" },
-            { id: 20, title: "Dune", author: "Frank Herbert", genre: "Science Fiction", year: 1965, available: "TRUE", lastCheckout: "2025-03-20" },
-            { id: 21, title: "Ender's Game", author: "Orson Scott Card", genre: "Science Fiction", year: 1985, available: "TRUE", lastCheckout: "2025-02-28" },
-            { id: 22, title: "Snow Crash", author: "Neal Stephenson", genre: "Science Fiction", year: 1992, available: "TRUE", lastCheckout: "2025-03-07" },
-            { id: 23, title: "Neuromancer", author: "William Gibson", genre: "Science Fiction", year: 1984, available: "TRUE", lastCheckout: "2025-03-01" },
-            { id: 24, title: "The Left Hand of Darkness", author: "Ursula K. Le Guin", genre: "Science Fiction", year: 1969, available: "TRUE", lastCheckout: "2025-03-12" },
-            { id: 25, title: "Sapiens: A Brief History of Humankind", author: "Yuval Noah Harari", genre: "Non-Fiction", year: 2011, available: "TRUE", lastCheckout: "2025-03-14" }
-        ];
+<div class="funny-section">
+    <h2>💡 Pro Tip from the Library of Life:</h2>
+    <p><em>"If you can’t convince them, confuse them."</em> – Someone probably writing this at 3 AM.</p>
+    <p>Don't worry, no cats were harmed in the making of these assignments... but one *did* walk across the keyboard once. 🐾</p>
+    <img src="https://i.imgur.com/1Yc3JHc.gif" alt="Funny cat typing">
+</div>
 
-        function loadBooks() {
-            const table = document.getElementById("bookTable");
-            books.forEach(book => {
-                let row = `<tr><td>${book.id}</td><td>${book.title}</td><td>${book.author}</td><td>${book.genre}</td><td>${book.year}</td><td>${book.available}</td><td>${book.lastCheckout}</td></tr>`;
-                table.innerHTML += row;
-            });
-        }
-
-        function searchBooks() {
-            let input = document.getElementById("searchBox").value.toLowerCase();
-            document.querySelectorAll("tbody tr").forEach(row => row.style.display = row.innerText.toLowerCase().includes(input) ? "" : "none");
-        }
-
-        window.onload = loadBooks;
-    </script>
+<footer>
+    &copy; 2025 My Assignments | Made with 💻, ☕, and just a hint of panic.
+</footer>
 
 </body>
 </html>
