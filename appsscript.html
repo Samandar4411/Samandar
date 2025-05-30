@@ -1,92 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Apps Script Guide</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ultimate Google Apps Script Guide</title>
   <style>
     body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      padding: 0;
-      font-family: 'Courier New', Courier, monospace;
-      background: linear-gradient(135deg, #141e30, #243b55);
-      color: #f8f8f2;
-      line-height: 1.6;
+      background: #f4f6f9;
+      color: #333;
     }
     header {
-      background-color: rgba(0,0,0,0.8);
-      padding: 2em 1em;
+      background-color: #1a73e8;
+      color: white;
+      padding: 40px 20px;
       text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     }
     header h1 {
-      margin: 0;
-      font-size: 2.2em;
-      color: #50fa7b;
+      margin-bottom: 10px;
     }
-    .content {
-      max-width: 800px;
-      margin: 2em auto;
-      padding: 2em;
-      background: rgba(255, 255, 255, 0.05);
+    nav {
+      background: #0b5394;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 15px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 18px;
+      background: #1a73e8;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      background: #155ab6;
+    }
+    section {
+      max-width: 960px;
+      margin: 30px auto;
+      background: white;
+      padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.05);
     }
     h2 {
-      color: #8be9fd;
-      margin-top: 1.5em;
+      color: #0b5394;
     }
-    p {
-      margin-bottom: 1.2em;
+    ol, ul {
+      margin-left: 20px;
     }
-    a.button {
-      display: inline-block;
-      margin: 1em 0;
-      padding: 0.7em 1.2em;
-      background: #6272a4;
-      color: #fff;
-      text-decoration: none;
+    .quote {
+      background: #e8f0fe;
+      border-left: 5px solid #4285f4;
+      padding: 15px;
+      margin: 20px 0;
+      font-style: italic;
       border-radius: 6px;
-      transition: background 0.3s;
     }
-    a.button:hover {
-      background: #50fa7b;
-      color: #000;
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      background: #eaeaea;
+      margin-top: 50px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Google Apps Script Briefing</h1>
-  </header>
-  <div class="content">
-    <h2>What is Google Apps Script?</h2>
-    <p>Google Apps Script is a cloud-based JavaScript platform that allows you to integrate and automate tasks across Google Workspace apps like Gmail, Google Sheets, Docs, Forms, and Drive. It enables users to build lightweight web applications and workflows with ease.</p>
 
-    <h2>Key Features</h2>
-    <ul>
-      <li>Write code directly in your browser</li>
-      <li>Automate repetitive tasks in Google apps</li>
-      <li>Trigger scripts using time, events, or user actions</li>
-      <li>Integrate with external APIs and services</li>
-      <li>Create add-ons, web apps, and custom functions</li>
-    </ul>
+<header>
+  <h1>🚀 Ultimate Guide to Google Apps Script</h1>
+  <p>Automate anything in Google Workspace with a sprinkle of code magic.</p>
+</header>
 
-    <h2>Example Use Cases</h2>
-    <p>
-      - Automatically send emails when a form is submitted<br>
-      - Generate reports from Google Sheets data<br>
-      - Set calendar events based on a spreadsheet<br>
-      - Build custom menus and UI in Docs or Sheets
-    </p>
+<nav>
+  <a href="https://docs.google.com/document/d/1VSeIZcXTnhK688wjcoC1dJOZbhTmzPl8HsC58pdLlHE/edit?usp=sharing" target="_blank">📄 Assignment Notes</a>
+  <a href="https://en.wikipedia.org/wiki/Google_Apps_Script" target="_blank">🌐 Wikipedia Source</a>
+</nav>
 
-    <h2>Start Writing Your First Script</h2>
-    <p>Go to <a href="https://script.google.com" target="_blank" class="button">script.google.com</a> and click on <strong>New Project</strong> to begin. You can write code similar to JavaScript using the built-in script editor.</p>
-
-    <h2>Useful Resources</h2>
-    <p>
-      <a href="https://developers.google.com/apps-script/guides" target="_blank" class="button">Official Apps Script Guides</a>
-    </p>
+<section>
+  <h2>1. What is Google Apps Script?</h2>
+  <p>Google Apps Script is a cloud-based scripting language for light-weight application development in the Google Workspace platform. Based on JavaScript, it enables users to create, automate, and extend Google services and third-party platforms.</p>
+  <div class="quote">"Think of Apps Script as your digital Swiss Army Knife for productivity."
   </div>
+</section>
+
+<section>
+  <h2>2. How It Works (The Mechanism)</h2>
+  <ol>
+    <li><strong>JavaScript Base:</strong> Apps Script is written in a subset of JavaScript, making it approachable for most developers.</li>
+    <li><strong>Cloud Hosted:</strong> All scripts are stored and run in the cloud, so no installation is needed.</li>
+    <li><strong>Bound & Standalone:</strong> You can create scripts attached to Docs, Sheets, or run them standalone via script.google.com.</li>
+    <li><strong>Triggers:</strong> Use time-based, form submission, or manual triggers to run your code automatically.</li>
+    <li><strong>Execution Environment:</strong> Google provides a script editor with logging, debugging, and deployment tools.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>3. What You Can Build (Use Cases)</h2>
+  <ul>
+    <li>📧 Auto-reply and email filters in Gmail</li>
+    <li>📊 Automated reports and dashboards in Google Sheets</li>
+    <li>📅 Calendar event scheduling based on spreadsheet data</li>
+    <li>📋 Form-to-Sheet integration and notifications</li>
+    <li>📦 Custom inventory trackers</li>
+    <li>🌍 Public web apps for managing tasks or sharing forms</li>
+  </ul>
+</section>
+
+<section>
+  <h2>4. Creative and Critical Thinking in Practice</h2>
+  <p>Google Apps Script isn't just about automation—it's about problem solving:</p>
+  <ul>
+    <li><strong>Creative:</strong> Build an interactive web app from a spreadsheet with live updates.</li>
+    <li><strong>Critical Thinking:</strong> Use logical structures to validate form data or catch user errors automatically.</li>
+    <li><strong>Design:</strong> Combine Apps Script with HTML/CSS to create mini dashboards that guide decision-making.</li>
+  </ul>
+  <div class="quote">"Creativity is intelligence having fun — especially when debugging loops at 2 AM."
+  </div>
+</section>
+
+<section>
+  <h2>5. Final Thoughts</h2>
+  <p>Whether you're automating an email or building an app to manage your school project, Apps Script gives you the tools to be both the coder and the creator. The sky’s the limit — and with Apps Script, it's automated too.</p>
+</section>
+
+<footer>
+  &copy; 2025 Google Apps Script Hub | Built with logic, humor, and lots of test runs ⚙️
+</footer>
+
 </body>
 </html>
